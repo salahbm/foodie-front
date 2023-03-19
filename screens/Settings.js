@@ -11,7 +11,13 @@ import {
 } from 'react-native';
 const Settings = () => {
   return (
-    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+    <View style={{flex: 1}}>
+      <View
+        style={{
+          height: 50,
+          backgroundColor: '#055DF8',
+        }}
+      />
       <Text>DKU Home</Text>
     </View>
   );
