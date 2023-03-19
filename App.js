@@ -9,11 +9,13 @@ import {
   useColorScheme,
   View,
 } from 'react-native';
+import Tabs from './navigation/tabs';
+import {NavigationContainer} from '@react-navigation/native';
 const App = () => {
   return (
-    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <Text>DKU Foodie</Text>
-    </View>
+    <NavigationContainer>
+      <Tabs />
+    </NavigationContainer>
   );
 };
 
