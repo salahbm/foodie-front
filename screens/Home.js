@@ -9,8 +9,10 @@ import {
   useColorScheme,
   View,
   Image,
+  Dimensions,
 } from 'react-native';
 import {map} from '../assests';
+const {width, height} = Dimensions.get('window');
 const Home = () => {
   return (
     <View style={{flex: 1}}>
@@ -24,33 +26,45 @@ const Home = () => {
       <Text style={styles.header}> Welcome Salah !</Text>
       <View
         style={{
-          flex: 0.8,
           justifyContent: 'center',
           alignItems: 'center',
-          marginVertical: 10,
+          flex: 1,
         }}>
-        <Image source={map} resizeMode="contain" style={{width: '90%'}} />
+        <Image
+          source={map}
+          resizeMode="cover"
+          style={{width: width * 0.9, borderRadius: 20, maxHeight: 330}}
+        />
       </View>
+      <Text style={styles.header}>Top Restaurants In This Area</Text>
       <ScrollView style={{flex: 1, width: '100%'}}>
-        <View
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            marginHorizontal: 20,
-          }}>
-          <Image
-            source={map}
-            style={{width: 100, height: 100, borderRadius: 99}}
-          />
-          <View
-            style={{
-              alignItems: 'flex-end',
-            }}>
-            <Text style={styles.restaurant}> Restaurant Name</Text>
-            <Text style={styles.foodtype}> Food Type </Text>
-          </View>
-        </View>
+        <RestaurantListItem />
+        <RestaurantListItem />
+        <RestaurantListItem />
+        <RestaurantListItem />
+        <RestaurantListItem />
       </ScrollView>
+    </View>
+  );
+};
+const RestaurantListItem = () => {
+  return (
+    <View
+      style={{
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginHorizontal: 20,
+        marginVertical: 10,
+      }}>
+      <Image source={map} style={{width: 100, height: 100, borderRadius: 99}} />
+      <View
+        style={{
+          alignItems: 'center',
+          flex: 1,
+        }}>
+        <Text style={styles.restaurant}> Restaurant Name</Text>
+        <Text style={styles.foodtype}> Food Type </Text>
+      </View>
     </View>
   );
 };
@@ -61,7 +75,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 700,
     color: '#333',
-    marginTop: 20,
+    marginTop: 10,
     marginLeft: 20,
   },
   restaurant: {

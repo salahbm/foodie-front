@@ -15,8 +15,11 @@ function Tabs() {
         tabBarShowLabel: false,
         headerShown: false,
         tabBarHideOnKeyboard: true,
+
         tabBarStyle: {
           backgroundColor: '#055DF8',
+          // borderTopRightRadius: 20,
+          // borderTopLeftRadius: 20,
         },
       })}>
       <Tab.Screen
