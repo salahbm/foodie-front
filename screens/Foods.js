@@ -6,7 +6,7 @@ import {
   StatusBar,
   StyleSheet,
   Text,
-  useColorScheme,
+  Platform,
   View,
 } from 'react-native';
 const Foods = () => {
@@ -14,7 +14,7 @@ const Foods = () => {
     <View style={{flex: 1}}>
       <View
         style={{
-          height: 50,
+          height: Platform.OS === 'ios' ? 50 : 10,
           backgroundColor: '#055DF8',
         }}
       />

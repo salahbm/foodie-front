@@ -6,7 +6,7 @@ import {
   StatusBar,
   StyleSheet,
   Text,
-  useColorScheme,
+  Platform,
   View,
   Image,
   Dimensions,
@@ -16,28 +16,40 @@ const {width, height} = Dimensions.get('window');
 const Home = () => {
   return (
     <View style={{flex: 1}}>
-      <View
-        style={{
-          height: 50,
-          backgroundColor: '#055DF8',
-        }}
-      />
+      {Platform.OS === 'ios' && (
+        <View
+          style={{
+            height: 50,
+            backgroundColor: '#055DF8',
+          }}
+        />
+      )}
 
-      <Text style={styles.header}> Welcome Salah !</Text>
       <View
         style={{
           justifyContent: 'center',
-          alignItems: 'center',
-          flex: 1,
+
+          flex: 0.9,
         }}>
+        <Text style={styles.header}> Welcome Salah !</Text>
         <Image
           source={map}
-          resizeMode="cover"
-          style={{width: width * 0.9, borderRadius: 20, maxHeight: 330}}
+          style={{
+            width: width * 0.9,
+            borderRadius: 15,
+            maxHeight: 270,
+            alignSelf: 'center',
+          }}
         />
       </View>
       <Text style={styles.header}>Top Restaurants In This Area</Text>
+
       <ScrollView style={{flex: 1, width: '100%'}}>
+        <RestaurantListItem />
+        <RestaurantListItem />
+        <RestaurantListItem />
+        <RestaurantListItem />
+        <RestaurantListItem />
         <RestaurantListItem />
         <RestaurantListItem />
         <RestaurantListItem />
@@ -54,9 +66,9 @@ const RestaurantListItem = () => {
         flexDirection: 'row',
         alignItems: 'center',
         marginHorizontal: 20,
-        marginVertical: 10,
+        marginBottom: 10,
       }}>
-      <Image source={map} style={{width: 100, height: 100, borderRadius: 99}} />
+      <Image source={map} style={{width: 80, height: 80, borderRadius: 15}} />
       <View
         style={{
           alignItems: 'center',
@@ -82,7 +94,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 700,
     color: '#333',
-    // textAlign: 'right',
   },
   foodtype: {
     fontSize: 15,
