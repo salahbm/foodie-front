@@ -44,7 +44,9 @@ const Home = () => {
       </View>
       <Text style={styles.header}>Top Restaurants In This Area</Text>
 
-      <ScrollView style={{flex: 1, width: '100%'}}>
+      <ScrollView
+        style={{flex: 1, width: '100%'}}
+        showsVerticalScrollIndicator={false}>
         <RestaurantListItem />
         <RestaurantListItem />
         <RestaurantListItem />
