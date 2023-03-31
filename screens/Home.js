@@ -27,8 +27,9 @@ const Home = () => {
         style={{
           justifyContent: 'center',
 
-          flex: 1,
-          marginTop :10
+          flex: 0.9,
+
+
 
         }}>
         <Text style={styles.header}> Welcome Salah !</Text>
@@ -37,7 +38,7 @@ const Home = () => {
           style={{
             width: width * 0.9,
             borderRadius: 15,
-            maxHeight: 270,
+            maxHeight:height >= 700 ? 280:240,
             alignSelf: 'center',
           }}
         />
