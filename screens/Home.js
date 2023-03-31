@@ -16,21 +16,18 @@ const {width, height} = Dimensions.get('window');
 const Home = () => {
   return (
     <View style={{flex: 1}}>
-    <View
-  style={{
-    height: height >= 700 ? 50 : 20,
-    backgroundColor: '#055DF8',
-  }}
-/>
+      <View
+        style={{
+          height: height >= 700 ? 40 : 20,
+          backgroundColor: '#055DF8',
+        }}
+      />
 
       <View
         style={{
           justifyContent: 'center',
 
           flex: 0.9,
-
-
-
         }}>
         <Text style={styles.header}> Welcome Salah !</Text>
         <Image
@@ -38,7 +35,7 @@ const Home = () => {
           style={{
             width: width * 0.9,
             borderRadius: 15,
-            maxHeight:height >= 700 ? 280:240,
+            maxHeight: height >= 700 ? 280 : 240,
             alignSelf: 'center',
           }}
         />
@@ -97,7 +94,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 700,
     color: '#333',
-marginVertical: 10,
+    marginVertical: 10,
     marginLeft: 20,
   },
   restaurant: {
