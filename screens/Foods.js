@@ -21,7 +21,7 @@ const Foods = () => {
     <View style={{flex: 1}}>
     <View
   style={{
-    height: height >= 700 ? 50 : 20,
+    height: height >= 700 ? 40 : 20,
     backgroundColor: '#055DF8',
   }}
 />
