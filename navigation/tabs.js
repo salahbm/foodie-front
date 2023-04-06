@@ -15,9 +15,8 @@ function Tabs() {
         tabBarShowLabel: false,
         headerShown: false,
         tabBarHideOnKeyboard: true,
-
         tabBarStyle: {
-          backgroundColor: '#2E86C1',
+          backgroundColor: '#055DF8',
         },
       })}>
       <Tab.Screen
