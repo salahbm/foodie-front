@@ -1,9 +1,8 @@
-import React from 'react';
-
+import React, {useEffect, useState} from 'react';
 import {
   SafeAreaView,
   ScrollView,
-  StatusBar,
+  FlatList,
   StyleSheet,
   Text,
   Platform,
@@ -12,13 +11,36 @@ import {
   Dimensions,
 } from 'react-native';
 import {map} from '../assests';
+import {collection, onSnapshot} from 'firebase/firestore';
+import {foodieDB} from '../src/config/firebase';
 const {width, height} = Dimensions.get('window');
 const Home = () => {
+  const [restaurants, setRestaurants] = useState([]);
+  const [foodtype, setFoodtype] = useState([]);
+  const [laoding, setLoading] = useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+    const restaurantQuery = collection(foodieDB, 'restaurant');
+    onSnapshot(restaurantQuery, snapshot => {
+      let restaurantList = [];
+      snapshot.docs.map(doc =>
+        restaurantList.push({...doc.data(), id: doc.id}),
+      );
+
+      console.log(restaurantList, 'fsdfsdfsdfsd');
+
+      setRestaurants(restaurantList);
+
+      setLoading(false);
+    });
+  }, []);
+
   return (
     <View style={{flex: 1}}>
       <View
         style={{
-          height: height >= 700 ? 40 : 20,
+          height: Platform.OS === 'ios' ? (height >= 700 ? 40 : 20) : 10,
           backgroundColor: '#055DF8',
         }}
       />
@@ -42,24 +64,18 @@ const Home = () => {
       </View>
       <Text style={styles.header2}>Top Restaurants In This Area</Text>
 
-      <ScrollView
+      {/* <ScrollView
         style={{flex: 1, width: '100%'}}
-        showsVerticalScrollIndicator={false}>
-        <RestaurantListItem />
-        <RestaurantListItem />
-        <RestaurantListItem />
-        <RestaurantListItem />
-        <RestaurantListItem />
-        <RestaurantListItem />
-        <RestaurantListItem />
-        <RestaurantListItem />
-        <RestaurantListItem />
-        <RestaurantListItem />
-      </ScrollView>
+        showsVerticalScrollIndicator={false}> */}
+      <FlatList
+        data={restaurants}
+        renderItem={RestaurantListItem}
+        keyExtractor={item => item.id}></FlatList>
+      {/* </ScrollView> */}
     </View>
   );
 };
-const RestaurantListItem = () => {
+const RestaurantListItem = ({item, restaurantName, foodtype}) => {
   return (
     <View
       style={{
@@ -74,8 +90,8 @@ const RestaurantListItem = () => {
           alignItems: 'center',
           flex: 1,
         }}>
-        <Text style={styles.restaurant}> Restaurant Name</Text>
-        <Text style={styles.foodtype}> Food Type </Text>
+        <Text style={styles.restaurant}>{restaurantName} </Text>
+        <Text style={styles.foodtype}>{foodtype} </Text>
       </View>
     </View>
   );

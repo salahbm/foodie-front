@@ -1,6 +1,6 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Home from '../screens/Home';
-import Settings from '../screens/Settings';
+import SettingsStack from '../screens/secondaryScreens/SettingsStack';
 import Foods from '../screens/Foods';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -56,8 +56,8 @@ function Tabs() {
         }}
       />
       <Tab.Screen
-        name="Settings"
-        component={Settings}
+        name="SettingsStack"
+        component={SettingsStack}
         options={{
           tabBarIcon: ({focused}) => (
             <View style={styles.container}>
@@ -67,7 +67,7 @@ function Tabs() {
                 size={22}
               />
               <Text style={{color: focused ? '#333' : '#FFFF', marginTop: 2}}>
-                Account
+                Settings
               </Text>
             </View>
           ),

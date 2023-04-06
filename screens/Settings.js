@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 
 import {
-  SafeAreaView,
+  Button,
   ScrollView,
   StatusBar,
   StyleSheet,
@@ -26,13 +26,19 @@ const Item = ({title}) => (
     <Text style={styles.title}>{title}</Text>
   </View>
 );
-const Settings = () => {
+const Settings = ({navigation}) => {
   const [selectedId, setSelectedId] = useState(null);
 
   const renderItem = ({item}) => <Item title={item.title} />;
 
   return (
     <View style={styles.container}>
+      <View
+        style={{
+          height: Platform.OS === 'ios' ? (height >= 700 ? 40 : 20) : 10,
+          backgroundColor: '#055DF8',
+        }}
+      />
       <FlatList
         horizontal
         showsHorizontalScrollIndicator={false}
@@ -41,6 +47,9 @@ const Settings = () => {
         keyExtractor={item => item.id}
         extraData={selectedId}
       />
+      <Button
+        title="account"
+        onPress={() => navigation.navigate('AddRestaurantScreen')}></Button>
     </View>
   );
 };
@@ -48,9 +57,9 @@ const Settings = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 50,
   },
   item: {
+    marginTop: 20,
     backgroundColor: COLORS.primary,
     padding: 5,
     borderRadius: 20,
