@@ -16,25 +16,23 @@ import {foodieDB} from '../src/config/firebase';
 const {width, height} = Dimensions.get('window');
 const Home = () => {
   const [restaurants, setRestaurants] = useState([]);
-  const [foodtype, setFoodtype] = useState([]);
   const [laoding, setLoading] = useState(false);
-
-  useEffect(() => {
-    setLoading(true);
-    const restaurantQuery = collection(foodieDB, 'restaurant');
-    onSnapshot(restaurantQuery, snapshot => {
-      let restaurantList = [];
-      snapshot.docs.map(doc =>
-        restaurantList.push({...doc.data(), id: doc.id}),
-      );
-
-      console.log(restaurantList, 'fsdfsdfsdfsd');
-
-      setRestaurants(restaurantList);
-
-      setLoading(false);
-    });
-  }, []);
+  try {
+    useEffect(() => {
+      setLoading(true);
+      const restaurantQuery = collection(foodieDB, 'restaurant');
+      onSnapshot(restaurantQuery, snapshot => {
+        let restaurantList = [];
+        snapshot.docs.map(doc =>
+          restaurantList.push({...doc.data(), id: doc.id}),
+        );
+        setRestaurants(restaurantList);
+        setLoading(false);
+      });
+    }, []);
+  } catch (error) {
+    console.log(error);
+  }
 
   return (
     <View style={{flex: 1}}>
@@ -70,12 +68,13 @@ const Home = () => {
       <FlatList
         data={restaurants}
         renderItem={RestaurantListItem}
-        keyExtractor={item => item.id}></FlatList>
+        keyExtractor={item => item.id}
+      />
       {/* </ScrollView> */}
     </View>
   );
 };
-const RestaurantListItem = ({item, restaurantName, foodtype}) => {
+const RestaurantListItem = ({item}) => {
   return (
     <View
       style={{
@@ -90,8 +89,8 @@ const RestaurantListItem = ({item, restaurantName, foodtype}) => {
           alignItems: 'center',
           flex: 1,
         }}>
-        <Text style={styles.restaurant}>{restaurantName} </Text>
-        <Text style={styles.foodtype}>{foodtype} </Text>
+        <Text style={styles.restaurant}>{item.restaurantName} </Text>
+        <Text style={styles.foodtype}>{item.foodtype} </Text>
       </View>
     </View>
   );
