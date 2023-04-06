@@ -14,6 +14,7 @@ import {addition, subtraction} from '../store/action';
 const Foods = () => {
   const data = useSelector(state => state.counter);
   const dispatch = useDispatch();
+
   return (
     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
       <View
