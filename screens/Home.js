@@ -99,7 +99,7 @@ const Home = () => {
         style={{flex: 1, width: '100%'}}
         data={data}
         renderItem={RestaurantListItem}
-        keyExtractor={item => item.id.toString()}
+        keyExtractor={item => item.id}
         showsVerticalScrollIndicator={false}
         vertical={true}
       />
