@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {
-  SafeAreaView,
+  ActivityIndicator,
   ScrollView,
   FlatList,
   StyleSheet,
@@ -9,29 +9,46 @@ import {
   View,
   Image,
   Dimensions,
+  TouchableOpacity,
 } from 'react-native';
+import Loading from '../components/Loading';
 import {map} from '../assests';
-import {collection, onSnapshot} from 'firebase/firestore';
-import {foodieDB} from '../src/config/firebase';
 const {width, height} = Dimensions.get('window');
 const Home = () => {
   const [restaurants, setRestaurants] = useState([]);
-  const [laoding, setLoading] = useState(false);
-  try {
-    useEffect(() => {
+  const [loading, setLoading] = useState(false);
+  const dummy = [
+    {
+      id: '1',
+      name: 'Maratang',
+      type: 'Chinese',
+    },
+    {
+      id: '2',
+      name: 'MomsTouch',
+      type: 'FastFood',
+    },
+    {
+      id: '3',
+      name: 'Udong',
+      type: 'Jaoanese',
+    },
+    {
+      id: '4',
+      name: 'Kimpab',
+      type: 'Korean',
+    },
+  ];
+  useEffect(() => {
+    function getData() {
       setLoading(true);
-      const restaurantQuery = collection(foodieDB, 'restaurant');
-      onSnapshot(restaurantQuery, snapshot => {
-        let restaurantList = [];
-        snapshot.docs.map(doc =>
-          restaurantList.push({...doc.data(), id: doc.id}),
-        );
-        setRestaurants(restaurantList);
-        setLoading(false);
-      });
-    }, []);
-  } catch (error) {
-    console.log(error);
+      setRestaurants(dummy);
+    }
+    getData();
+    setLoading(false);
+  }, []);
+  if (loading) {
+    <Loading />;
   }
 
   return (
@@ -60,17 +77,17 @@ const Home = () => {
           }}
         />
       </View>
+
       <Text style={styles.header2}>Top Restaurants In This Area</Text>
 
-      {/* <ScrollView
-        style={{flex: 1, width: '100%'}}
-        showsVerticalScrollIndicator={false}> */}
       <FlatList
+        style={{flex: 1, width: '100%'}}
         data={restaurants}
         renderItem={RestaurantListItem}
         keyExtractor={item => item.id}
+        showsVerticalScrollIndicator={false}
+        vertical={true}
       />
-      {/* </ScrollView> */}
     </View>
   );
 };
@@ -84,14 +101,16 @@ const RestaurantListItem = ({item}) => {
         marginBottom: 10,
       }}>
       <Image source={map} style={{width: 80, height: 80, borderRadius: 15}} />
-      <View
+
+      <TouchableOpacity
+        id={item.id}
         style={{
           alignItems: 'center',
           flex: 1,
         }}>
-        <Text style={styles.restaurant}>{item.restaurantName} </Text>
-        <Text style={styles.foodtype}>{item.foodtype} </Text>
-      </View>
+        <Text style={styles.restaurant}>{item.name} </Text>
+        <Text style={styles.foodtype}>{item.type} </Text>
+      </TouchableOpacity>
     </View>
   );
 };
