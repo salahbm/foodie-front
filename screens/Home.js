@@ -13,9 +13,13 @@ import {
 } from 'react-native';
 import Loading from '../components/Loading';
 import {map} from '../assests';
+import {apiURL} from '../constants/apiURL';
+import axios from 'axios';
 const {width, height} = Dimensions.get('window');
 const Home = () => {
   const [restaurants, setRestaurants] = useState([]);
+  const [data, setData] = useState([]);
+
   const [loading, setLoading] = useState(false);
   const dummy = [
     {
@@ -39,6 +43,7 @@ const Home = () => {
       type: 'Korean',
     },
   ];
+
   useEffect(() => {
     function getData() {
       setLoading(true);
@@ -47,6 +52,16 @@ const Home = () => {
     getData();
     setLoading(false);
   }, []);
+
+  useEffect(() => {
+    axios
+      .get(apiURL)
+      .then(response => setData(response.data))
+      .catch(error => {
+        console.error('Error fetching data from server:', error);
+      });
+  }, []);
+
   if (loading) {
     <Loading />;
   }
@@ -55,7 +70,7 @@ const Home = () => {
     <View style={{flex: 1}}>
       <View
         style={{
-          height: Platform.OS === 'ios' ? (height >= 700 ? 40 : 20) : 10,
+          height: Platform.OS === 'ios' ? (height >= 700 ? 40 : 0) : 0,
           backgroundColor: '#055DF8',
         }}
       />
@@ -82,9 +97,9 @@ const Home = () => {
 
       <FlatList
         style={{flex: 1, width: '100%'}}
-        data={restaurants}
+        data={data}
         renderItem={RestaurantListItem}
-        keyExtractor={item => item.id}
+        keyExtractor={item => item.id.toString()}
         showsVerticalScrollIndicator={false}
         vertical={true}
       />
@@ -121,14 +136,14 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 700,
     color: '#333',
-    marginTop: 10,
+    marginTop: Platform.OS === 'ios' ? 10 : 20,
     marginLeft: 20,
   },
   header2: {
     fontSize: 20,
     fontWeight: 700,
     color: '#333',
-    marginVertical: 10,
+    marginTop: 20,
     marginLeft: 20,
   },
   restaurant: {
