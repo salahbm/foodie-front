@@ -1,36 +1,53 @@
 import React, {useState} from 'react';
-import {View, Text, TextInput, Button} from 'react-native';
-
+import {View, Text, Button, StyleSheet} from 'react-native';
+import {TextInput} from 'react-native-paper';
 const AddRestaurantScreen = ({navigation}) => {
-  const [restaurantName, setRestaurantName] = useState('');
-  const [foodTime, setFoodTime] = useState('');
-  const [menuItem, setMenuItem] = useState('');
-  const [itemPrice, setItemPrice] = useState('');
+  const [restaurants, setRestaurants] = useState({
+    name: '',
+    type: '',
+  });
 
-  const saveRestaurant = () => {
-    // Save restaurant data to database
-    // Navigate to second screen
-
-    navigation.goBack();
+  const handleChange = (name, value) => {
+    setRestaurants({...restaurants, [name]: value});
   };
 
+  const saveRestaurant = () => {
+    // Do something with the updated restaurants state object here
+    navigation.goBack();
+  };
+  console.log(restaurants);
   return (
-    <View>
-      <Text>Restaurant Name:</Text>
-      <TextInput value={restaurantName} onChangeText={setRestaurantName} />
+    <View style={styles.container}>
+      <Text style={styles.text}>Restaurant Name:</Text>
+      <TextInput
+        label={'Name'}
+        value={restaurants.name}
+        onChangeText={value => handleChange('name', value)}
+      />
 
-      <Text>Food Time:</Text>
-      <TextInput value={foodTime} onChangeText={setFoodTime} />
+      <Text style={styles.text}>Food Type:</Text>
 
-      <Text>Menu Item:</Text>
-      <TextInput value={menuItem} onChangeText={setMenuItem} />
-
-      <Text>Item Price:</Text>
-      <TextInput value={itemPrice} onChangeText={setItemPrice} />
+      <TextInput
+        label="Type"
+        value={restaurants.type}
+        onChangeText={value => handleChange('type', value)}
+      />
 
       <Button title="Save" onPress={saveRestaurant} />
     </View>
   );
 };
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+  },
+  text: {
+    textAlign: 'center',
+    marginVertical: 10,
+    fontSize: 15,
+    fontWeight: '600',
+  },
+});
 
 export default AddRestaurantScreen;

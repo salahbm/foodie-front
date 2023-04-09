@@ -9,6 +9,7 @@ import {
   Platform,
   View,
   FlatList,
+  Dimensions,
 } from 'react-native';
 import {COLORS} from '../constants/theme';
 const DATA = [
@@ -54,6 +55,7 @@ const Settings = ({navigation}) => {
   );
 };
 
+const {height, width} = Dimensions.get('window');
 const styles = StyleSheet.create({
   container: {
     flex: 1,

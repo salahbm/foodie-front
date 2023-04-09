@@ -70,7 +70,7 @@ const Home = () => {
     <View style={{flex: 1}}>
       <View
         style={{
-          height: Platform.OS === 'ios' ? (height >= 700 ? 40 : 0) : 0,
+          height: Platform.OS === 'ios' ? (height >= 700 ? 35 : 10) : 0,
           backgroundColor: '#055DF8',
         }}
       />
@@ -79,7 +79,7 @@ const Home = () => {
         style={{
           justifyContent: 'center',
 
-          flex: 0.9,
+          flex: 0.75,
         }}>
         <Text style={styles.header}> Welcome Salah !</Text>
         <Image
@@ -136,8 +136,9 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 700,
     color: '#333',
-    marginTop: Platform.OS === 'ios' ? 10 : 20,
+    marginTop: Platform.OS === 'ios' ? 5 : 20,
     marginLeft: 20,
+    marginBottom: 10,
   },
   header2: {
     fontSize: 20,
