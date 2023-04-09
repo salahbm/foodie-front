@@ -1,17 +1,48 @@
 import axios from 'axios';
 import React, {useState} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  ScrollView,
+  Dimensions,
+  Platform,
+} from 'react-native';
 import {TextInput, Button} from 'react-native-paper';
+import * as ImagePicker from 'react-native-image-picker';
 const AddRestaurantScreen = ({navigation}) => {
   const [restaurants, setRestaurants] = useState({
     name: '',
     type: '',
+    businessNum: '',
+    photo1: null,
+    photo2: null,
+    photo3: null,
   });
+
+  const handleChoosePic = photoNum => {
+    const options = {
+      nodata: true,
+    };
+    ImagePicker.launchImageLibrary(options, response => {
+      console.log('response', response);
+      if (response.assets && response.assets.length > 0) {
+        const photoURI = response.assets[0].uri;
+        setRestaurants(prevState => {
+          return {
+            ...prevState,
+            [`photo${photoNum}`]: photoURI,
+          };
+        });
+      }
+    });
+  };
 
   const handleChange = (name, value) => {
     setRestaurants({...restaurants, [name]: value});
   };
-
+  console.log(restaurants);
   const saveRestaurant = async () => {
     try {
       await axios.post('http://127.0.0.1:8082/data', restaurants);
@@ -23,6 +54,7 @@ const AddRestaurantScreen = ({navigation}) => {
 
   return (
     <View style={styles.container}>
+      <Text style={styles.text}>Add Restaurant:</Text>
       <Text style={styles.text}>Restaurant Name:</Text>
       <TextInput
         label={'Name'}
@@ -37,9 +69,69 @@ const AddRestaurantScreen = ({navigation}) => {
         value={restaurants.type}
         onChangeText={value => handleChange('type', value)}
       />
+      <Text style={styles.text}>Business Number:</Text>
 
+      <TextInput
+        label="Number"
+        value={restaurants.businessNum}
+        onChangeText={value => handleChange('businessNum', value)}
+      />
+      <ScrollView
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        style={{height: 300, marginTop: 20}}>
+        <View style={{}}>
+          {restaurants.photo1 && (
+            <Image
+              source={{uri: restaurants.photo1}}
+              style={{width: 150, height: 150, marginBottom: 10}}
+              resizeMode="cover"
+            />
+          )}
+          <Button
+            icon="camera"
+            mode="contained"
+            onPress={() => handleChoosePic(1)}>
+            Pic 1
+          </Button>
+        </View>
+        <View style={{marginLeft: 10}}>
+          {restaurants.photo2 && (
+            <Image
+              resizeMode="cover"
+              source={{uri: restaurants.photo2}}
+              style={{width: 150, height: 150, marginBottom: 10}}
+            />
+          )}
+          <Button
+            icon="camera"
+            mode="contained"
+            onPress={() => handleChoosePic(2)}>
+            Pic 2
+          </Button>
+        </View>
+        <View style={{marginLeft: 10}}>
+          {restaurants.photo3 && (
+            <Image
+              resizeMode="cover"
+              source={{uri: restaurants.photo3}}
+              style={{
+                width: 150,
+                height: 150,
+                marginBottom: 10,
+              }}
+            />
+          )}
+          <Button
+            icon="camera"
+            mode="contained"
+            onPress={() => handleChoosePic(3)}>
+            Pic 3
+          </Button>
+        </View>
+      </ScrollView>
       <Button
-        style={{marginTop: 40, width: 200, alignSelf: 'center'}}
+        style={{width: 150, alignSelf: 'center', bottom: 30}}
         icon="food"
         mode="contained"
         onPress={saveRestaurant}>
@@ -48,13 +140,17 @@ const AddRestaurantScreen = ({navigation}) => {
     </View>
   );
 };
+const {height, width} = Dimensions.get('window');
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
+    marginTop: Platform.OS === 'ios' ? (height >= 700 ? 35 : 10) : 0,
+    paddingHorizontal: 20,
   },
   text: {
     textAlign: 'center',
+
     marginVertical: 10,
     fontSize: 15,
     fontWeight: '600',

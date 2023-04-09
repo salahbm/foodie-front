@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
-
+import {Button} from 'react-native-paper';
 import {
-  Button,
   ScrollView,
   StatusBar,
   StyleSheet,
@@ -48,9 +47,27 @@ const Settings = ({navigation}) => {
         keyExtractor={item => item.id}
         extraData={selectedId}
       />
-      <Button
-        title="account"
-        onPress={() => navigation.navigate('AddRestaurantScreen')}></Button>
+      <View
+        style={{
+          flexDirection: 'row',
+          alignItems: 'center',
+          alignSelf: 'center',
+        }}>
+        <Button
+          icon="plus"
+          mode="contained-tonal"
+          onPress={() => navigation.navigate('AddRestaurantScreen')}
+          style={styles.btn}>
+          Add Restaurant
+        </Button>
+        <Button
+          icon="delete"
+          mode="contained-tonal"
+          onPress={() => navigation.navigate('DeleteRestaurantScreen')}
+          style={styles.btn1}>
+          Delete Restaurant
+        </Button>
+      </View>
     </View>
   );
 };
@@ -59,6 +76,7 @@ const {height, width} = Dimensions.get('window');
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: 'center',
   },
   item: {
     marginTop: 20,
@@ -66,13 +84,22 @@ const styles = StyleSheet.create({
     padding: 5,
     borderRadius: 20,
     marginHorizontal: 5,
-    height: 50,
+    height: 30,
+
     justifyContent: 'center',
     alignItems: 'center',
   },
   title: {
-    fontSize: 22,
+    fontSize: 16,
     color: 'white',
+  },
+  btn: {
+    width: 200,
+    backgroundColor: 'green',
+  },
+  btn1: {
+    width: 200,
+    backgroundColor: 'red',
   },
 });
 
