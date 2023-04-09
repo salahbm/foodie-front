@@ -1,6 +1,7 @@
+import axios from 'axios';
 import React, {useState} from 'react';
-import {View, Text, Button, StyleSheet} from 'react-native';
-import {TextInput} from 'react-native-paper';
+import {View, Text, StyleSheet} from 'react-native';
+import {TextInput, Button} from 'react-native-paper';
 const AddRestaurantScreen = ({navigation}) => {
   const [restaurants, setRestaurants] = useState({
     name: '',
@@ -11,11 +12,15 @@ const AddRestaurantScreen = ({navigation}) => {
     setRestaurants({...restaurants, [name]: value});
   };
 
-  const saveRestaurant = () => {
-    // Do something with the updated restaurants state object here
+  const saveRestaurant = async () => {
+    try {
+      await axios.post('http://127.0.0.1:8082/data', restaurants);
+    } catch (err) {
+      console.log('Error sending to Backend: ' + err);
+    }
     navigation.goBack();
   };
-  console.log(restaurants);
+
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Restaurant Name:</Text>
@@ -33,7 +38,13 @@ const AddRestaurantScreen = ({navigation}) => {
         onChangeText={value => handleChange('type', value)}
       />
 
-      <Button title="Save" onPress={saveRestaurant} />
+      <Button
+        style={{marginTop: 40, width: 200, alignSelf: 'center'}}
+        icon="food"
+        mode="contained"
+        onPress={saveRestaurant}>
+        Press me
+      </Button>
     </View>
   );
 };

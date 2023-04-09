@@ -17,49 +17,21 @@ import {apiURL} from '../constants/apiURL';
 import axios from 'axios';
 const {width, height} = Dimensions.get('window');
 const Home = () => {
-  const [restaurants, setRestaurants] = useState([]);
   const [data, setData] = useState([]);
-
   const [loading, setLoading] = useState(false);
-  const dummy = [
-    {
-      id: '1',
-      name: 'Maratang',
-      type: 'Chinese',
-    },
-    {
-      id: '2',
-      name: 'MomsTouch',
-      type: 'FastFood',
-    },
-    {
-      id: '3',
-      name: 'Udong',
-      type: 'Jaoanese',
-    },
-    {
-      id: '4',
-      name: 'Kimpab',
-      type: 'Korean',
-    },
-  ];
 
   useEffect(() => {
     function getData() {
       setLoading(true);
-      setRestaurants(dummy);
+      axios
+        .get(apiURL)
+        .then(response => setData(response.data))
+        .catch(error => {
+          console.error('Error fetching data from server:', error);
+        });
     }
     getData();
     setLoading(false);
-  }, []);
-
-  useEffect(() => {
-    axios
-      .get(apiURL)
-      .then(response => setData(response.data))
-      .catch(error => {
-        console.error('Error fetching data from server:', error);
-      });
   }, []);
 
   if (loading) {
