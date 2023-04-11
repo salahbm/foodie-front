@@ -46,21 +46,21 @@ const AddRestaurantScreen = ({navigation}) => {
   const handleChange = (name, value) => {
     setRestaurants({...restaurants, [name]: value});
   };
-  console.log(restaurants);
+
   const saveRestaurant = async () => {
     try {
       await axios.post('http://127.0.0.1:8082/data', restaurants);
     } catch (err) {
       console.log('Error sending to Backend: ' + err);
     }
-    navigation.goBack();
+    navigation.navigate('Settings');
   };
 
   return (
     <View style={styles.container}>
       <View style={{alignItems: 'center', flexDirection: 'row'}}>
         <TouchableOpacity
-          onPress={() => navigation.goBack()}
+          onPress={() => navigation.navigate('Settings')}
           style={{flex: 0.5}}>
           <Entypo name="chevron-left" size={30} color="#333" />
         </TouchableOpacity>

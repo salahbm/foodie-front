@@ -58,6 +58,15 @@ const DeleteRestaurantScreen = ({navigation}) => {
         onChangeText={value => handleChange('businessNum', value)}
         style={styles.input}
       />
+      <Text style={styles.text}>Phone Number:</Text>
+
+      <TextInput
+        placeholder="Enter Phone Number"
+        keyboardType="numeric"
+        value={restaurants.businessNum}
+        onChangeText={value => handleChange('businessNum', value)}
+        style={styles.input}
+      />
       <Text style={styles.note}>
         Note! Deleting the restaurant information will cause permanently removal
         all data about current restaurant.
@@ -90,10 +99,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   text: {
-    textAlign: 'center',
+    textAlign: 'left',
     marginVertical: 20,
     fontSize: 15,
     fontWeight: '600',
+    marginHorizontal: 5,
   },
   textHeader: {
     textAlign: 'center',

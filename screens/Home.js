@@ -15,10 +15,14 @@ import Loading from '../components/Loading';
 import {map} from '../assests';
 import {apiURL} from '../constants/apiURL';
 import axios from 'axios';
+import {COLORS} from '../constants/theme';
 const {width, height} = Dimensions.get('window');
 const Home = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [selectedId, setSelectedId] = useState(null);
+
+  const renderItem = ({item}) => <Item title={item.title} />;
 
   useEffect(() => {
     function getData() {
@@ -51,7 +55,8 @@ const Home = () => {
         style={{
           justifyContent: 'center',
 
-          flex: 0.75,
+          flex: 0.4,
+          marginVertical: 20,
         }}>
         <Text style={styles.header}> Welcome Salah !</Text>
         <Image
@@ -64,17 +69,31 @@ const Home = () => {
           }}
         />
       </View>
-
-      <Text style={styles.header2}>Top Restaurants In This Area</Text>
-
-      <FlatList
-        style={{flex: 1, width: '100%', paddingTop: 5}}
-        data={data}
-        renderItem={RestaurantListItem}
-        keyExtractor={item => item.id}
-        showsVerticalScrollIndicator={false}
-        vertical={true}
-      />
+      <View
+        style={{
+          flex: 0.6,
+          marginHorizontal: 20,
+          marginTop: Platform.OS === 'android' ? (height >= 700 ? 20 : 0) : 0,
+        }}>
+        <Text style={styles.header2}>Top Restaurants In This Area</Text>
+        <FlatList
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          data={DATA}
+          renderItem={renderItem}
+          keyExtractor={item => item.id}
+          extraData={selectedId}
+          style={{width: '100%', paddingVertical: 10}}
+        />
+        <FlatList
+          style={{width: '100%', paddingTop: 5}}
+          data={data}
+          renderItem={RestaurantListItem}
+          keyExtractor={item => item.id}
+          showsVerticalScrollIndicator={false}
+          vertical={true}
+        />
+      </View>
     </View>
   );
 };
@@ -84,7 +103,7 @@ const RestaurantListItem = ({item}) => {
       style={{
         flexDirection: 'row',
         alignItems: 'center',
-        marginHorizontal: 20,
+
         marginBottom: 10,
         backgroundColor: '#FFFF',
       }}>
@@ -107,6 +126,23 @@ const RestaurantListItem = ({item}) => {
   );
 };
 
+const DATA = [
+  {id: '1', title: 'Korean'},
+  {id: '2', title: 'Western'},
+  {id: '3', title: 'Chinese'},
+  {id: '4', title: 'Japanese'},
+  {id: '5', title: 'Salad'},
+  {id: '6', title: 'Seafood'},
+  {id: '7', title: 'Juice'},
+  {id: '8', title: 'Desert'},
+];
+
+const Item = ({title}) => (
+  <View style={styles.item}>
+    <Text style={styles.title}>{title}</Text>
+  </View>
+);
+
 export default Home;
 const styles = StyleSheet.create({
   header: {
@@ -119,10 +155,8 @@ const styles = StyleSheet.create({
   },
   header2: {
     fontSize: 20,
-    fontWeight: 700,
+    fontWeight: '700',
     color: '#333',
-    marginTop: 20,
-    marginLeft: 20,
   },
   restaurant: {
     fontSize: 20,
@@ -133,5 +167,18 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: 700,
     color: '#333',
+  },
+  item: {
+    backgroundColor: COLORS.primary,
+    borderRadius: 10,
+    marginHorizontal: 5,
+    height: 30,
+    width: 70,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  title: {
+    fontSize: 16,
+    color: 'white',
   },
 });
