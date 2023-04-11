@@ -58,7 +58,7 @@ const Home = ({navigation}) => {
           flex: 0.4,
           marginVertical: 20,
         }}>
-        <Text style={styles.header}> Welcome Salah !</Text>
+        <Text style={styles.header}> Welcome {'Username'} !</Text>
         <Image
           source={map}
           style={{
