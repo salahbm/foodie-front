@@ -17,7 +17,7 @@ import {apiURL} from '../constants/apiURL';
 import axios from 'axios';
 import {COLORS} from '../constants/theme';
 const {width, height} = Dimensions.get('window');
-const Home = () => {
+const Home = ({navigation}) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [selectedId, setSelectedId] = useState(null);
@@ -63,7 +63,7 @@ const Home = () => {
           source={map}
           style={{
             width: width * 0.9,
-            borderRadius: 15,
+            borderRadius: 10,
             maxHeight: height >= 700 ? 280 : 240,
             alignSelf: 'center',
           }}
@@ -88,7 +88,9 @@ const Home = () => {
         <FlatList
           style={{width: '100%', paddingTop: 5}}
           data={data}
-          renderItem={RestaurantListItem}
+          renderItem={({item}) => (
+            <RestaurantListItem navigation={navigation} item={item} />
+          )}
           keyExtractor={item => item.id}
           showsVerticalScrollIndicator={false}
           vertical={true}
@@ -97,13 +99,13 @@ const Home = () => {
     </View>
   );
 };
-const RestaurantListItem = ({item}) => {
+const RestaurantListItem = ({item, navigation}) => {
   return (
     <View
       style={{
         flexDirection: 'row',
         alignItems: 'center',
-
+        borderRadius: 10,
         marginBottom: 10,
         backgroundColor: '#FFFF',
       }}>
@@ -115,6 +117,9 @@ const RestaurantListItem = ({item}) => {
 
       <TouchableOpacity
         id={item.id}
+        onPress={() =>
+          navigation.navigate('RestaurantScreen', {restaurant: item})
+        }
         style={{
           alignItems: 'center',
           flex: 1,

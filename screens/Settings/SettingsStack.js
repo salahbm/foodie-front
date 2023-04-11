@@ -11,11 +11,11 @@ const SettingsStack = ({navigation, route}) => {
 
     if (tabHiddenRoutes.includes(getFocusedRouteNameFromRoute(route))) {
       navigation.setOptions({
-        tabBarStyle: {display: 'none', height: 60},
+        tabBarStyle: {display: 'none'},
       });
     } else {
       navigation.setOptions({
-        tabBarStyle: {display: 'flex', backgroundColor: '#055DF8', height: 60},
+        tabBarStyle: {display: 'flex', backgroundColor: '#055DF8'},
       });
     }
   }, [navigation, route]);
