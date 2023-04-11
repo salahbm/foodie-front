@@ -17,6 +17,7 @@ function Tabs() {
         tabBarHideOnKeyboard: true,
         tabBarStyle: {
           backgroundColor: '#055DF8',
+          height: 60,
         },
       })}>
       <Tab.Screen
@@ -82,6 +83,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     position: 'absolute',
-    bottom: 0,
+    bottom: -20,
   },
 });

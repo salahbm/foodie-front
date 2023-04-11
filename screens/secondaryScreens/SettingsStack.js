@@ -10,9 +10,13 @@ const SettingsStack = ({navigation, route}) => {
     const tabHiddenRoutes = ['AddRestaurantScreen', 'DeleteRestaurantScreen'];
 
     if (tabHiddenRoutes.includes(getFocusedRouteNameFromRoute(route))) {
-      navigation.setOptions({tabBarStyle: {display: 'none'}});
+      navigation.setOptions({
+        tabBarStyle: {display: 'none', height: 60},
+      });
     } else {
-      navigation.setOptions({tabBarStyle: {display: 'flex'}});
+      navigation.setOptions({
+        tabBarStyle: {display: 'flex', backgroundColor: '#055DF8', height: 60},
+      });
     }
   }, [navigation, route]);
 
