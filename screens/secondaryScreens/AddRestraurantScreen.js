@@ -8,9 +8,13 @@ import {
   ScrollView,
   Dimensions,
   Platform,
+  TextInput,
+  TouchableOpacity,
 } from 'react-native';
-import {TextInput, Button} from 'react-native-paper';
+import {Button} from 'react-native-paper';
 import * as ImagePicker from 'react-native-image-picker';
+import Entypo from 'react-native-vector-icons/Entypo';
+
 const AddRestaurantScreen = ({navigation}) => {
   const [restaurants, setRestaurants] = useState({
     name: '',
@@ -54,10 +58,20 @@ const AddRestaurantScreen = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Add Restaurant:</Text>
+      <View style={{alignItems: 'center', flexDirection: 'row'}}>
+        <TouchableOpacity
+          onPress={() => navigation.goBack()}
+          style={{flex: 0.5}}>
+          <Entypo name="chevron-left" size={30} color="#333" />
+        </TouchableOpacity>
+
+        <Text style={styles.textHeader}>Add Restaurant:</Text>
+      </View>
       <Text style={styles.text}>Restaurant Name:</Text>
       <TextInput
-        label={'Name'}
+        placeholder={'Enter Restaurant Name'}
+        style={styles.input}
+        placeholderTextColor={'#4545'}
         value={restaurants.name}
         onChangeText={value => handleChange('name', value)}
       />
@@ -65,16 +79,20 @@ const AddRestaurantScreen = ({navigation}) => {
       <Text style={styles.text}>Food Type:</Text>
 
       <TextInput
-        label="Type"
+        placeholder="Enter Restaurant Type"
+        placeholderTextColor={'#4545'}
+        style={styles.input}
         value={restaurants.type}
         onChangeText={value => handleChange('type', value)}
       />
       <Text style={styles.text}>Business Number:</Text>
 
       <TextInput
-        label="Number"
+        placeholder="Enter Restaurant Business Number"
+        placeholderTextColor={'#4545'}
         value={restaurants.businessNum}
         onChangeText={value => handleChange('businessNum', value)}
+        style={styles.input}
       />
       <ScrollView
         horizontal
@@ -131,11 +149,16 @@ const AddRestaurantScreen = ({navigation}) => {
         </View>
       </ScrollView>
       <Button
-        style={{width: 150, alignSelf: 'center', bottom: 30}}
+        style={{
+          width: 200,
+          alignSelf: 'center',
+          bottom: 30,
+          backgroundColor: 'green',
+        }}
         icon="food"
         mode="contained"
         onPress={saveRestaurant}>
-        Press me
+        Save Restaurant
       </Button>
     </View>
   );
@@ -144,7 +167,7 @@ const {height, width} = Dimensions.get('window');
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    backgroundColor: '#ebf0f2',
     marginTop: Platform.OS === 'ios' ? (height >= 700 ? 35 : 10) : 0,
     paddingHorizontal: 20,
   },
@@ -154,6 +177,21 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     fontSize: 15,
     fontWeight: '600',
+  },
+  textHeader: {
+    textAlign: 'center',
+
+    marginVertical: 10,
+    fontSize: 25,
+    fontWeight: 'bold',
+  },
+  input: {
+    width: width * 0.9,
+    alignSelf: 'center',
+    padding: 10,
+    height: 40,
+    backgroundColor: '#a9ebba',
+    borderRadius: 10,
   },
 });
 

@@ -39,7 +39,7 @@ const Home = () => {
   }
 
   return (
-    <View style={{flex: 1}}>
+    <View style={{flex: 1, backgroundColor: '#ebf0f2'}}>
       <View
         style={{
           height: Platform.OS === 'ios' ? (height >= 700 ? 35 : 10) : 0,
@@ -68,7 +68,7 @@ const Home = () => {
       <Text style={styles.header2}>Top Restaurants In This Area</Text>
 
       <FlatList
-        style={{flex: 1, width: '100%'}}
+        style={{flex: 1, width: '100%', paddingTop: 5}}
         data={data}
         renderItem={RestaurantListItem}
         keyExtractor={item => item.id}
@@ -86,8 +86,13 @@ const RestaurantListItem = ({item}) => {
         alignItems: 'center',
         marginHorizontal: 20,
         marginBottom: 10,
+        backgroundColor: '#FFFF',
       }}>
-      <Image source={map} style={{width: 80, height: 80, borderRadius: 15}} />
+      <Image
+        source={map}
+        resizeMode="cover"
+        style={{width: 100, height: 100, borderRadius: 15}}
+      />
 
       <TouchableOpacity
         id={item.id}

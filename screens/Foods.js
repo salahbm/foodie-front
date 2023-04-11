@@ -19,10 +19,10 @@ const Foods = () => {
   const dispatch = useDispatch();
 
   return (
-    <View style={{flex: 1}}>
+    <View style={{flex: 1, backgroundColor: '#ebf0f2'}}>
       <View
         style={{
-          height: Platform.OS === 'ios' ? (height >= 700 ? 40 : 20) : 10,
+          height: Platform.OS === 'ios' ? (height >= 700 ? 35 : 10) : 0,
           backgroundColor: '#055DF8',
         }}
       />

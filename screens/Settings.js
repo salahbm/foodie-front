@@ -1,10 +1,11 @@
 import React, {useState} from 'react';
-import {Button} from 'react-native-paper';
+import {Text, Button} from 'react-native-paper';
+import Entypo from 'react-native-vector-icons/Entypo';
+
 import {
   ScrollView,
-  StatusBar,
+  TouchableOpacity,
   StyleSheet,
-  Text,
   Platform,
   View,
   FlatList,
@@ -35,10 +36,35 @@ const Settings = ({navigation}) => {
     <View style={styles.container}>
       <View
         style={{
-          height: Platform.OS === 'ios' ? (height >= 700 ? 40 : 20) : 10,
+          height: Platform.OS === 'ios' ? (height >= 700 ? 35 : 10) : 0,
           backgroundColor: '#055DF8',
         }}
       />
+
+      <Text variant="headlineSmall" style={{fontWeight: '700', padding: 20}}>
+        Your Account Information
+      </Text>
+      <View
+        style={{
+          paddingHorizontal: 20,
+        }}>
+        <MoreScreenBtn
+          btnName={'Add New Restaurant'}
+          onPress={() => navigation.navigate('AddRestaurantScreen')}
+        />
+        <MoreScreenBtn
+          btnName={'Delete Existing Restaurant'}
+          onPress={() => navigation.navigate('DeleteRestaurantScreen')}
+        />
+        <MoreScreenBtn
+          btnName={'Update Restaurant Data'}
+          onPress={() => navigation.navigate('DeleteRestaurantScreen')}
+        />
+        <MoreScreenBtn btnName={'FAQ'} />
+        <MoreScreenBtn btnName={'Help Center'} />
+        <MoreScreenBtn btnName={'Terms and Conditions'} />
+        <MoreScreenBtn btnName={'Withdraw My Account'} />
+      </View>
       <FlatList
         horizontal
         showsHorizontalScrollIndicator={false}
@@ -47,26 +73,48 @@ const Settings = ({navigation}) => {
         keyExtractor={item => item.id}
         extraData={selectedId}
       />
+    </View>
+  );
+};
+
+const MoreScreenBtn = ({onPress, btnName}) => {
+  return (
+    <View
+      style={{
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginBottom: 10,
+      }}>
       <View
         style={{
-          flexDirection: 'row',
-          alignItems: 'center',
-          alignSelf: 'center',
+          width: width * 0.9,
+          height: 56,
+
+          backgroundColor: '#FFFF',
+          borderRadius: 16,
+          justifyContent: 'center',
         }}>
-        <Button
-          icon="plus"
-          mode="contained-tonal"
-          onPress={() => navigation.navigate('AddRestaurantScreen')}
-          style={styles.btn}>
-          Add Restaurant
-        </Button>
-        <Button
-          icon="delete"
-          mode="contained-tonal"
-          onPress={() => navigation.navigate('DeleteRestaurantScreen')}
-          style={styles.btn1}>
-          Delete Restaurant
-        </Button>
+        <TouchableOpacity
+          onPress={onPress}
+          style={{
+            flexDirection: 'row',
+
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            paddingHorizontal: 15,
+          }}>
+          <Text
+            style={{
+              fontWeight: '700',
+              fontSize: 16,
+              color: '#313131',
+              marginLeft: 19,
+            }}>
+            {btnName}
+          </Text>
+
+          <Entypo name="chevron-right" size={20} color="#CBCCD4" />
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -76,7 +124,7 @@ const {height, width} = Dimensions.get('window');
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    backgroundColor: '#ebf0f2',
   },
   item: {
     marginTop: 20,
