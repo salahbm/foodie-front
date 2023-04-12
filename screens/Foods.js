@@ -22,7 +22,7 @@ const Foods = () => {
     <View style={{flex: 1, backgroundColor: '#ebf0f2'}}>
       <View
         style={{
-          height: Platform.OS === 'ios' ? (height >= 700 ? 35 : 10) : 0,
+          height: Platform.OS === 'ios' ? (height >= 800 ? 50 : 10) : 0,
           backgroundColor: '#055DF8',
         }}
       />

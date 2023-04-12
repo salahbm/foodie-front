@@ -16,6 +16,7 @@ import {map} from '../assests';
 import {apiURL} from '../constants/apiURL';
 import axios from 'axios';
 import {COLORS} from '../constants/theme';
+import {ContexData} from '../constants/useContext';
 const {width, height} = Dimensions.get('window');
 const Home = ({navigation}) => {
   const [data, setData] = useState([]);
@@ -38,15 +39,11 @@ const Home = ({navigation}) => {
     setLoading(false);
   }, []);
 
-  if (loading) {
-    <Loading />;
-  }
-
   return (
     <View style={{flex: 1, backgroundColor: '#ebf0f2'}}>
       <View
         style={{
-          height: Platform.OS === 'ios' ? (height >= 700 ? 35 : 10) : 0,
+          height: Platform.OS === 'ios' ? (height >= 800 ? 50 : 10) : 0,
           backgroundColor: '#055DF8',
         }}
       />
@@ -85,6 +82,7 @@ const Home = ({navigation}) => {
           extraData={selectedId}
           style={{width: '100%', paddingVertical: 10}}
         />
+        {loading && <Loading />}
         <FlatList
           style={{width: '100%', paddingTop: 5}}
           data={data}
@@ -125,7 +123,7 @@ const RestaurantListItem = ({item, navigation}) => {
           flex: 1,
         }}>
         <Text style={styles.restaurant}>{item.name} </Text>
-        <Text style={styles.foodtype}>{item.type} </Text>
+        <Text style={styles.foodtype}>{item.type1} </Text>
       </TouchableOpacity>
     </View>
   );

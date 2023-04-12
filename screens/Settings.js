@@ -18,7 +18,7 @@ const Settings = ({navigation}) => {
     <View style={styles.container}>
       <View
         style={{
-          height: Platform.OS === 'ios' ? (height >= 700 ? 35 : 10) : 0,
+          height: Platform.OS === 'ios' ? (height >= 800 ? 50 : 10) : 0,
           backgroundColor: '#055DF8',
         }}
       />
