@@ -102,12 +102,27 @@ const RestaurantInfo = ({restaurant}) => {
     </View>
   );
 };
+
+const HoursRow = ({day, openTime, closeTime}) => {
+  return (
+    <View style={styles.rowHours}>
+      <Text style={styles.text}>{day}</Text>
+      <View style={styles.row}>
+        <Text style={[styles.text, {color: '#4cd936'}]}>{openTime}</Text>
+        <Text style={[styles.text, {color: '#fa7366', flex: 0.5}]}>
+          {closeTime}
+        </Text>
+      </View>
+    </View>
+  );
+};
+
 const BusinessHoursModal = ({restaurant, visible, hideModal}) => {
   const containerStyle = {
     marginHorizontal: 20,
     padding: 20,
     backgroundColor: '#FFFF',
-    height: height / 2,
+    height: height / 3,
     borderRadius: 10,
   };
   return (
@@ -116,8 +131,42 @@ const BusinessHoursModal = ({restaurant, visible, hideModal}) => {
         visible={visible}
         onDismiss={hideModal}
         contentContainerStyle={containerStyle}>
-        <Text>{restaurant.sunday_start}</Text>
-        {console.log(restaurant)}
+        <HoursRow day="Day" openTime={'Open'} closeTime={'Finish'} />
+        <HoursRow
+          day="Monday"
+          openTime={restaurant.monday_start}
+          closeTime={restaurant.monday_end}
+        />
+        <HoursRow
+          day="Tuesday"
+          openTime={restaurant.tuesday_start}
+          closeTime={restaurant.tuesday_end}
+        />
+        <HoursRow
+          day="Wednesday"
+          openTime={restaurant.wednesday_start}
+          closeTime={restaurant.wednesday_end}
+        />
+        <HoursRow
+          day="Thursday"
+          openTime={restaurant.thursday_start}
+          closeTime={restaurant.thursday_end}
+        />
+        <HoursRow
+          day="Friday"
+          openTime={restaurant.friday_start}
+          closeTime={restaurant.friday_end}
+        />
+        <HoursRow
+          day="Saturday"
+          openTime={restaurant.saturday_start}
+          closeTime={restaurant.saturday_end}
+        />
+        <HoursRow
+          day="Sunday"
+          openTime={restaurant.sunday_start}
+          closeTime={restaurant.sunday_end}
+        />
       </Modal>
     </Portal>
   );
@@ -148,6 +197,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     marginTop: 5,
+  },
+  rowHours: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 10,
+    justifyContent: 'space-between',
   },
   text: {
     fontSize: 16,
