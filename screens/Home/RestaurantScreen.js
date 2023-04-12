@@ -47,8 +47,8 @@ const RestaurantScreen = ({navigation}) => {
             }}>
             <Text style={styles.text}>Business Hours :</Text>
 
-            <Button textColor="#FFFF" onPress={showModal}>
-              Display
+            <Button icon={'eye'} textColor="#FFFF" onPress={showModal}>
+              Show
             </Button>
           </View>
           <BusinessHoursModal

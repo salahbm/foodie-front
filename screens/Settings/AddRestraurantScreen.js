@@ -85,7 +85,7 @@ const AddRestaurantScreen = ({navigation}) => {
 
           <Text style={styles.textHeader}>Add Restaurant:</Text>
         </View>
-        <ScrollView>
+        <ScrollView style={{flex: 1}} showsVerticalScrollIndicator={false}>
           <Text style={styles.text}>Restaurant Name:</Text>
           <TextInput
             placeholder={'Enter Restaurant Name'}
@@ -156,7 +156,9 @@ const AddRestaurantScreen = ({navigation}) => {
             }}>
             <Text style={styles.text}>Business Hours :</Text>
 
-            <Button onPress={showModal}>Select</Button>
+            <Button icon={'clock'} onPress={showModal}>
+              Select
+            </Button>
           </View>
           <BusinessHoursModal
             hideModal={hideModal}
@@ -177,52 +179,51 @@ const AddRestaurantScreen = ({navigation}) => {
           />
 
           <ScrollView
+            style={{marginTop: 20}}
             horizontal
-            showsHorizontalScrollIndicator={false}
-            style={{height: 300, marginTop: 20}}>
-            <View style={{}}>
+            showsHorizontalScrollIndicator={false}>
+            <View>
               {restaurants.photo1 && (
                 <Image
                   source={{uri: restaurants.photo1}}
-                  style={{width: 150, height: 150, marginBottom: 10}}
+                  style={styles.img}
                   resizeMode="cover"
                 />
               )}
               <Button
+                style={{margin: 15}}
                 icon="camera"
                 mode="contained"
                 onPress={() => handleChoosePic(1)}>
                 Pic 1
               </Button>
             </View>
-            <View style={{marginLeft: 10}}>
+            <View>
               {restaurants.photo2 && (
                 <Image
                   resizeMode="cover"
                   source={{uri: restaurants.photo2}}
-                  style={{width: 150, height: 150, marginBottom: 10}}
+                  style={styles.img}
                 />
               )}
               <Button
+                style={{margin: 15}}
                 icon="camera"
                 mode="contained"
                 onPress={() => handleChoosePic(2)}>
                 Pic 2
               </Button>
             </View>
-            <View style={{marginLeft: 10}}>
+            <View>
               {restaurants.photo3 && (
                 <Image
                   resizeMode="cover"
                   source={{uri: restaurants.photo3}}
-                  style={{
-                    width: 150,
-                    height: 150,
-                    marginBottom: 10,
-                  }}
+                  style={styles.img}
                 />
               )}
               <Button
+                style={{margin: 15}}
                 icon="camera"
                 mode="contained"
                 onPress={() => handleChoosePic(3)}>
@@ -230,12 +231,14 @@ const AddRestaurantScreen = ({navigation}) => {
               </Button>
             </View>
           </ScrollView>
+
           <Button
             style={{
               width: 200,
               alignSelf: 'center',
-
               backgroundColor: 'green',
+              marginBottom: 30,
+              marginTop: 10,
             }}
             icon="food"
             mode="contained"
@@ -335,10 +338,10 @@ const BusinessHoursModal = ({
 const {height, width} = Dimensions.get('window');
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: '#ebf0f2',
-    marginTop: Platform.OS === 'ios' ? (height >= 700 ? 35 : 10) : 0,
+    marginTop: Platform.OS === 'ios' ? (height >= 700 ? 45 : 10) : 0,
     paddingHorizontal: 20,
+    flex: 1,
   },
   text: {
     textAlign: 'center',
@@ -393,6 +396,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     marginHorizontal: 5,
   },
+  img: {width: 100, height: 100, margin: 15},
 });
 
 export default AddRestaurantScreen;
