@@ -9,7 +9,9 @@ import axios from 'axios';
 import {apiURL} from './constants/apiURL';
 const App = () => {
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
+    setLoading(true);
     function getDatas() {
       axios
         .get(apiURL)
@@ -17,13 +19,14 @@ const App = () => {
         .catch(error => {
           console.error('Error fetching data from server:', error);
         });
+      setLoading(false);
     }
     getDatas();
   }, []);
-  console.log(data);
+
   return (
     <NavigationContainer>
-      <ContexData.Provider value={data}>
+      <ContexData.Provider value={{data, loading}}>
         <Provider store={store}>
           <PaperProvider>
             <Tabs />

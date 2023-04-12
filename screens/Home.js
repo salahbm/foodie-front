@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {
   ActivityIndicator,
   ScrollView,
@@ -19,25 +19,8 @@ import {COLORS} from '../constants/theme';
 import {ContexData} from '../constants/useContext';
 const {width, height} = Dimensions.get('window');
 const Home = ({navigation}) => {
-  const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const {data, loading} = useContext(ContexData);
   const [selectedId, setSelectedId] = useState(null);
-
-  const renderItem = ({item}) => <Item title={item.title} />;
-
-  useEffect(() => {
-    function getData() {
-      setLoading(true);
-      axios
-        .get(apiURL)
-        .then(response => setData(response.data))
-        .catch(error => {
-          console.error('Error fetching data from server:', error);
-        });
-    }
-    getData();
-    setLoading(false);
-  }, []);
 
   return (
     <View style={{flex: 1, backgroundColor: '#ebf0f2'}}>
@@ -76,8 +59,8 @@ const Home = ({navigation}) => {
         <FlatList
           horizontal
           showsHorizontalScrollIndicator={false}
-          data={DATA}
-          renderItem={renderItem}
+          data={data}
+          renderItem={({item}) => <FlatCategories item={item} />}
           keyExtractor={item => item.id}
           extraData={selectedId}
           style={{width: '100%', paddingVertical: 10}}
@@ -99,7 +82,11 @@ const Home = ({navigation}) => {
 };
 const RestaurantListItem = ({item, navigation}) => {
   return (
-    <View
+    <TouchableOpacity
+      id={item.id}
+      onPress={() =>
+        navigation.navigate('RestaurantScreen', {restaurant: item})
+      }
       style={{
         flexDirection: 'row',
         alignItems: 'center',
@@ -113,38 +100,31 @@ const RestaurantListItem = ({item, navigation}) => {
         style={{width: 100, height: 100, borderRadius: 15}}
       />
 
-      <TouchableOpacity
-        id={item.id}
-        onPress={() =>
-          navigation.navigate('RestaurantScreen', {restaurant: item})
-        }
+      <View
         style={{
           alignItems: 'center',
           flex: 1,
         }}>
         <Text style={styles.restaurant}>{item.name} </Text>
-        <Text style={styles.foodtype}>{item.type1} </Text>
-      </TouchableOpacity>
-    </View>
+        <View style={styles.row}>
+          <Text style={styles.foodtype}>
+            {item.type1}
+            {'    '}{' '}
+          </Text>
+          <Text style={styles.foodtype}>{item.type2} </Text>
+        </View>
+      </View>
+    </TouchableOpacity>
   );
 };
 
-const DATA = [
-  {id: '1', title: 'Korean'},
-  {id: '2', title: 'Western'},
-  {id: '3', title: 'Chinese'},
-  {id: '4', title: 'Japanese'},
-  {id: '5', title: 'Salad'},
-  {id: '6', title: 'Seafood'},
-  {id: '7', title: 'Juice'},
-  {id: '8', title: 'Desert'},
-];
-
-const Item = ({title}) => (
-  <View style={styles.item}>
-    <Text style={styles.title}>{title}</Text>
-  </View>
-);
+const FlatCategories = ({item}) => {
+  return (
+    <TouchableOpacity style={styles.item}>
+      <Text style={styles.title}>{item.type1}</Text>
+    </TouchableOpacity>
+  );
+};
 
 export default Home;
 const styles = StyleSheet.create({
@@ -183,5 +163,10 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 16,
     color: 'white',
+  },
+  row: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
 });

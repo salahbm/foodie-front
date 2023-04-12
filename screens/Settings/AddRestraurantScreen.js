@@ -11,18 +11,35 @@ import {
   TextInput,
   TouchableOpacity,
 } from 'react-native';
-import {Button} from 'react-native-paper';
+import {Picker} from '@react-native-picker/picker';
+
+import {Button, Modal, Portal, Provider} from 'react-native-paper';
 import * as ImagePicker from 'react-native-image-picker';
 import Entypo from 'react-native-vector-icons/Entypo';
 
 const AddRestaurantScreen = ({navigation}) => {
+  const [visible, setVisible] = useState(false);
+
+  const showModal = () => setVisible(true);
+  const hideModal = () => setVisible(false);
   const [restaurants, setRestaurants] = useState({
     name: '',
-    type: '',
+    type1: '',
+    type2: '',
     businessNum: '',
+    phone: '',
+    address: '',
     photo1: null,
     photo2: null,
     photo3: null,
+    note: '',
+    Sunday: {start: '08:00', end: '21:00'},
+    Monday: {start: '08:00', end: '21:00'},
+    Tuesday: {start: '08:00', end: '21:00'},
+    Wednesday: {start: '08:00', end: '21:00'},
+    Thursday: {start: '08:00', end: '21:00'},
+    Friday: {start: '08:00', end: '21:00'},
+    Saturday: {start: '08:00', end: '21:00'},
   });
 
   const handleChoosePic = photoNum => {
@@ -57,110 +74,262 @@ const AddRestaurantScreen = ({navigation}) => {
   };
 
   return (
-    <View style={styles.container}>
-      <View style={{alignItems: 'center', flexDirection: 'row'}}>
-        <TouchableOpacity
-          onPress={() => navigation.navigate('Settings')}
-          style={{flex: 0.5}}>
-          <Entypo name="chevron-left" size={30} color="#333" />
-        </TouchableOpacity>
+    <Provider>
+      <View style={styles.container}>
+        <View style={{alignItems: 'center', flexDirection: 'row'}}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('Settings')}
+            style={{flex: 0.5}}>
+            <Entypo name="chevron-left" size={30} color="#333" />
+          </TouchableOpacity>
 
-        <Text style={styles.textHeader}>Add Restaurant:</Text>
+          <Text style={styles.textHeader}>Add Restaurant:</Text>
+        </View>
+        <ScrollView>
+          <Text style={styles.text}>Restaurant Name:</Text>
+          <TextInput
+            placeholder={'Enter Restaurant Name'}
+            style={styles.input}
+            placeholderTextColor={'#4545'}
+            value={restaurants.name}
+            onChangeText={value => handleChange('name', value)}
+          />
+          <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+            <View>
+              <Text style={styles.text}>Food Type 1: </Text>
+              <TextInput
+                placeholder="Enter Restaurant Type"
+                placeholderTextColor={'#4545'}
+                style={styles.inputtype}
+                value={restaurants.type1}
+                onChangeText={value => handleChange('type1', value)}
+              />
+            </View>
+            <View>
+              <Text style={styles.text}>Food Type 2:</Text>
+              <TextInput
+                placeholder="Enter Restaurant Type"
+                placeholderTextColor={'#4545'}
+                style={styles.inputtype}
+                value={restaurants.type2}
+                onChangeText={value => handleChange('type2', value)}
+              />
+            </View>
+          </View>
+
+          <Text style={styles.text}>Business Number:</Text>
+
+          <TextInput
+            placeholder="Enter Restaurant Business Number"
+            placeholderTextColor={'#4545'}
+            value={restaurants.businessNum}
+            onChangeText={value => handleChange('businessNum', value)}
+            style={styles.input}
+          />
+          <Text style={styles.text}>Phone Number:</Text>
+
+          <TextInput
+            placeholder="Enter Phone Number"
+            placeholderTextColor={'#4545'}
+            value={restaurants.phone}
+            onChangeText={value => handleChange('phone', value)}
+            style={styles.input}
+          />
+          <Text style={styles.text}>Address :</Text>
+
+          <TextInput
+            placeholder="Address"
+            placeholderTextColor={'#4545'}
+            value={restaurants.address}
+            onChangeText={value => handleChange('address', value)}
+            style={styles.input}
+          />
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              paddingHorizontal: 20,
+              backgroundColor: '#a9ebba',
+              borderRadius: 10,
+              marginTop: 20,
+            }}>
+            <Text style={styles.text}>Business Hours :</Text>
+
+            <Button onPress={showModal}>Select</Button>
+          </View>
+          <BusinessHoursModal
+            hideModal={hideModal}
+            showModal={showModal}
+            visible={visible}
+            restaurants={restaurants}
+            setRestaurants={setRestaurants}
+          />
+          <Text style={styles.text}>Note :</Text>
+
+          <TextInput
+            placeholder="You can enter note for customers to see what is new in the restaurant(it can be updated anytime"
+            placeholderTextColor={'#4545'}
+            value={restaurants.note}
+            multiline={true}
+            onChangeText={value => handleChange('note', value)}
+            style={[styles.input, {height: 150}]}
+          />
+
+          <ScrollView
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            style={{height: 300, marginTop: 20}}>
+            <View style={{}}>
+              {restaurants.photo1 && (
+                <Image
+                  source={{uri: restaurants.photo1}}
+                  style={{width: 150, height: 150, marginBottom: 10}}
+                  resizeMode="cover"
+                />
+              )}
+              <Button
+                icon="camera"
+                mode="contained"
+                onPress={() => handleChoosePic(1)}>
+                Pic 1
+              </Button>
+            </View>
+            <View style={{marginLeft: 10}}>
+              {restaurants.photo2 && (
+                <Image
+                  resizeMode="cover"
+                  source={{uri: restaurants.photo2}}
+                  style={{width: 150, height: 150, marginBottom: 10}}
+                />
+              )}
+              <Button
+                icon="camera"
+                mode="contained"
+                onPress={() => handleChoosePic(2)}>
+                Pic 2
+              </Button>
+            </View>
+            <View style={{marginLeft: 10}}>
+              {restaurants.photo3 && (
+                <Image
+                  resizeMode="cover"
+                  source={{uri: restaurants.photo3}}
+                  style={{
+                    width: 150,
+                    height: 150,
+                    marginBottom: 10,
+                  }}
+                />
+              )}
+              <Button
+                icon="camera"
+                mode="contained"
+                onPress={() => handleChoosePic(3)}>
+                Pic 3
+              </Button>
+            </View>
+          </ScrollView>
+          <Button
+            style={{
+              width: 200,
+              alignSelf: 'center',
+
+              backgroundColor: 'green',
+            }}
+            icon="food"
+            mode="contained"
+            onPress={saveRestaurant}>
+            Save Restaurant
+          </Button>
+        </ScrollView>
       </View>
-      <Text style={styles.text}>Restaurant Name:</Text>
-      <TextInput
-        placeholder={'Enter Restaurant Name'}
-        style={styles.input}
-        placeholderTextColor={'#4545'}
-        value={restaurants.name}
-        onChangeText={value => handleChange('name', value)}
-      />
+    </Provider>
+  );
+};
 
-      <Text style={styles.text}>Food Type:</Text>
+const BusinessHoursModal = ({
+  hideModal,
+  visible,
+  restaurants,
+  setRestaurants,
+}) => {
+  //Business hours
+  const containerStyle = {
+    marginHorizontal: 20,
+    padding: 20,
+    backgroundColor: '#FFFF',
+    height: height / 2,
+    borderRadius: 10,
+  };
+  const DAYS_OF_WEEK = [
+    'Sunday',
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+  ];
+  const handleHoursChange = (day, field, value) => {
+    setRestaurants(prevState => ({
+      ...prevState,
+      [day]: {
+        ...prevState[day],
+        [field]: value,
+      },
+    }));
+  };
 
-      <TextInput
-        placeholder="Enter Restaurant Type"
-        placeholderTextColor={'#4545'}
-        style={styles.input}
-        value={restaurants.type}
-        onChangeText={value => handleChange('type', value)}
-      />
-      <Text style={styles.text}>Business Number:</Text>
+  const renderPickerItems = () => {
+    const items = [];
 
-      <TextInput
-        placeholder="Enter Restaurant Business Number"
-        placeholderTextColor={'#4545'}
-        value={restaurants.businessNum}
-        onChangeText={value => handleChange('businessNum', value)}
-        style={styles.input}
-      />
-      <ScrollView
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        style={{height: 300, marginTop: 20}}>
-        <View style={{}}>
-          {restaurants.photo1 && (
-            <Image
-              source={{uri: restaurants.photo1}}
-              style={{width: 150, height: 150, marginBottom: 10}}
-              resizeMode="cover"
-            />
-          )}
-          <Button
-            icon="camera"
-            mode="contained"
-            onPress={() => handleChoosePic(1)}>
-            Pic 1
-          </Button>
-        </View>
-        <View style={{marginLeft: 10}}>
-          {restaurants.photo2 && (
-            <Image
-              resizeMode="cover"
-              source={{uri: restaurants.photo2}}
-              style={{width: 150, height: 150, marginBottom: 10}}
-            />
-          )}
-          <Button
-            icon="camera"
-            mode="contained"
-            onPress={() => handleChoosePic(2)}>
-            Pic 2
-          </Button>
-        </View>
-        <View style={{marginLeft: 10}}>
-          {restaurants.photo3 && (
-            <Image
-              resizeMode="cover"
-              source={{uri: restaurants.photo3}}
-              style={{
-                width: 150,
-                height: 150,
-                marginBottom: 10,
-              }}
-            />
-          )}
-          <Button
-            icon="camera"
-            mode="contained"
-            onPress={() => handleChoosePic(3)}>
-            Pic 3
-          </Button>
-        </View>
-      </ScrollView>
-      <Button
-        style={{
-          width: 200,
-          alignSelf: 'center',
-          bottom: 30,
-          backgroundColor: 'green',
-        }}
-        icon="food"
-        mode="contained"
-        onPress={saveRestaurant}>
-        Save Restaurant
-      </Button>
-    </View>
+    for (let i = 0; i <= 23; i++) {
+      const hour = i < 10 ? `0${i}` : `${i}`;
+      items.push(
+        <Picker.Item key={hour} label={`${hour}:00`} value={`${hour}:00`} />,
+      );
+      items.push(
+        <Picker.Item
+          key={`${hour}:30`}
+          label={`${hour}:30`}
+          value={`${hour}:30`}
+        />,
+      );
+    }
+
+    return items;
+  };
+  return (
+    <Portal>
+      <Modal
+        visible={visible}
+        onDismiss={hideModal}
+        contentContainerStyle={containerStyle}>
+        {DAYS_OF_WEEK.map(day => (
+          <View key={day} style={styles.row}>
+            <Text style={styles.label}>{day}</Text>
+            <View style={styles.pickerContainer}>
+              <Picker
+                itemStyle={{color: 'green', height: 50}}
+                style={styles.picker}
+                selectedValue={restaurants[day].start}
+                onValueChange={value => handleHoursChange(day, 'start', value)}>
+                {renderPickerItems()}
+              </Picker>
+              <Text style={styles.separator}>-</Text>
+              <Picker
+                itemStyle={{color: 'red', height: 50}}
+                style={styles.picker}
+                selectedValue={restaurants[day].end}
+                onValueChange={value => handleHoursChange(day, 'end', value)}>
+                {renderPickerItems()}
+              </Picker>
+            </View>
+          </View>
+        ))}
+      </Modal>
+    </Portal>
   );
 };
 const {height, width} = Dimensions.get('window');
@@ -192,6 +361,37 @@ const styles = StyleSheet.create({
     height: 40,
     backgroundColor: '#a9ebba',
     borderRadius: 10,
+  },
+  inputtype: {
+    width: width * 0.4,
+    padding: 10,
+    height: 40,
+    backgroundColor: '#a9ebba',
+    borderRadius: 10,
+  },
+  row: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 10,
+  },
+  label: {
+    fontSize: 15,
+    flex: 0.35,
+  },
+  pickerContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderRadius: 10,
+  },
+  picker: {
+    flex: 1,
+    height: 50,
+  },
+  separator: {
+    fontSize: 20,
+    marginHorizontal: 5,
   },
 });
 
