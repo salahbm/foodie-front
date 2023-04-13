@@ -31,10 +31,6 @@ const Settings = ({navigation}) => {
           paddingHorizontal: 20,
         }}>
         <MoreScreenBtn
-          btnName={'Restaurant Owner Page'}
-          onPress={() => navigation.navigate('AddRestaurantScreen')}
-        />
-        <MoreScreenBtn
           btnName={'Add New Restaurant'}
           onPress={() => navigation.navigate('AddRestaurantScreen')}
         />

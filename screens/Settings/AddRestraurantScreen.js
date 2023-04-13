@@ -85,7 +85,7 @@ const AddRestaurantScreen = ({navigation}) => {
 
           <Text style={styles.textHeader}>Add Restaurant:</Text>
         </View>
-        <ScrollView style={{flex: 1}} showsVerticalScrollIndicator={false}>
+        <ScrollView style={{}} showsVerticalScrollIndicator={false}>
           <Text style={styles.text}>Restaurant Name:</Text>
           <TextInput
             placeholder={'Enter Restaurant Name'}
@@ -341,7 +341,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#ebf0f2',
     marginTop: Platform.OS === 'ios' ? (height >= 700 ? 45 : 10) : 0,
     paddingHorizontal: 20,
-    flex: 1,
+    height: height,
   },
   text: {
     textAlign: 'center',
