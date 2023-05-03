@@ -17,35 +17,35 @@ import {COLORS} from '../constants/theme';
 const Settings = ({navigation}) => {
   return (
     <SafeAreaView>
-    <View style={styles.container}>
-      
+      <View style={styles.container}>
+        <Text
+          variant="headlineSmall"
+          style={{fontWeight: '700', paddingLeft: 24, paddingBottom: 10}}>
+          Your Account Information
+        </Text>
+        <View
+          style={{
+            paddingHorizontal: 20,
+          }}>
+          <MoreScreenBtn
+            btnName={'Add New Restaurant'}
+            onPress={() => navigation.navigate('AddRestaurantScreen')}
+          />
 
-      <Text variant="headlineSmall" style={{fontWeight: '700', padding: 20}}>
-        Your Account Information
-      </Text>
-      <View
-        style={{
-          paddingHorizontal: 20,
-        }}>
-        <MoreScreenBtn
-          btnName={'Add New Restaurant'}
-          onPress={() => navigation.navigate('AddRestaurantScreen')}
-        />
-
-        <MoreScreenBtn
-          btnName={'Update Restaurant Data'}
-          onPress={() => navigation.navigate('DeleteRestaurantScreen')}
-        />
-        <MoreScreenBtn btnName={'FAQ'} />
-        <MoreScreenBtn btnName={'Help Center'} />
-        <MoreScreenBtn btnName={'Terms and Conditions'} />
-        <MoreScreenBtn
-          btnName={'Delete Existing Restaurant'}
-          onPress={() => navigation.navigate('DeleteRestaurantScreen')}
-        />
-        <MoreScreenBtn btnName={'Withdraw My Account'} />
+          <MoreScreenBtn
+            btnName={'Update Restaurant Data'}
+            onPress={() => navigation.navigate('DeleteRestaurantScreen')}
+          />
+          <MoreScreenBtn btnName={'FAQ'} />
+          <MoreScreenBtn btnName={'Help Center'} />
+          <MoreScreenBtn btnName={'Terms and Conditions'} />
+          <MoreScreenBtn
+            btnName={'Delete Existing Restaurant'}
+            onPress={() => navigation.navigate('DeleteRestaurantScreen')}
+          />
+          <MoreScreenBtn btnName={'Withdraw My Account'} />
+        </View>
       </View>
-    </View>
     </SafeAreaView>
   );
 };
