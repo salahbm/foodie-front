@@ -85,7 +85,9 @@ const AddRestaurantScreen = ({navigation}) => {
 
           <Text style={styles.textHeader}>Add Restaurant:</Text>
         </View>
-        <ScrollView style={{}} showsVerticalScrollIndicator={false}>
+        <ScrollView
+          style={{backgroundColor: '#ebf0f2'}}
+          showsVerticalScrollIndicator={false}>
           <Text style={styles.text}>Restaurant Name:</Text>
           <TextInput
             placeholder={'Enter Restaurant Name'}
@@ -179,7 +181,7 @@ const AddRestaurantScreen = ({navigation}) => {
           />
 
           <ScrollView
-            style={{marginTop: 20}}
+            style={{marginTop: 10, paddingLeft: 15}}
             horizontal
             showsHorizontalScrollIndicator={false}>
             <View>
@@ -191,7 +193,7 @@ const AddRestaurantScreen = ({navigation}) => {
                 />
               )}
               <Button
-                style={{margin: 15}}
+                style={{margin: 5}}
                 icon="camera"
                 mode="contained"
                 onPress={() => handleChoosePic(1)}>
@@ -207,7 +209,7 @@ const AddRestaurantScreen = ({navigation}) => {
                 />
               )}
               <Button
-                style={{margin: 15}}
+                style={{margin: 5}}
                 icon="camera"
                 mode="contained"
                 onPress={() => handleChoosePic(2)}>
@@ -223,7 +225,7 @@ const AddRestaurantScreen = ({navigation}) => {
                 />
               )}
               <Button
-                style={{margin: 15}}
+                style={{margin: 5}}
                 icon="camera"
                 mode="contained"
                 onPress={() => handleChoosePic(3)}>
@@ -341,7 +343,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#ebf0f2',
     marginTop: Platform.OS === 'ios' ? (height >= 700 ? 45 : 10) : 0,
     paddingHorizontal: 20,
-    flex: 1,
   },
   text: {
     textAlign: 'center',
@@ -396,7 +397,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     marginHorizontal: 5,
   },
-  img: {width: 100, height: 100, margin: 15},
+  img: {width: 100, height: 100, margin: 5},
 });
 
 export default AddRestaurantScreen;
