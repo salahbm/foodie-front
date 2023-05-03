@@ -16,12 +16,7 @@ import {COLORS} from '../constants/theme';
 const Settings = ({navigation}) => {
   return (
     <View style={styles.container}>
-      <View
-        style={{
-          height: Platform.OS === 'ios' ? (height >= 800 ? 50 : 10) : 0,
-          backgroundColor: '#055DF8',
-        }}
-      />
+      
 
       <Text variant="headlineSmall" style={{fontWeight: '700', padding: 20}}>
         Your Account Information

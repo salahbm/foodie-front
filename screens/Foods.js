@@ -20,12 +20,7 @@ const Foods = () => {
 
   return (
     <View style={{flex: 1, backgroundColor: '#ebf0f2'}}>
-      <View
-        style={{
-          height: Platform.OS === 'ios' ? (height >= 800 ? 50 : 10) : 0,
-          backgroundColor: '#055DF8',
-        }}
-      />
+      
       <Text style={styles.header}>Categories</Text>
 
       {/* <TouchableOpacity onPress={() => dispatch(addition())}>
