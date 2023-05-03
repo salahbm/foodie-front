@@ -79,13 +79,7 @@ const RestaurantListItem = ({item, navigation}) => {
       onPress={() =>
         navigation.navigate('RestaurantScreen', {restaurant: item})
       }
-      style={{
-        flexDirection: 'row',
-        alignItems: 'center',
-        borderRadius: 10,
-        marginBottom: 10,
-        backgroundColor: '#FFFF',
-      }}>
+      style={styles}>
       <Image
         source={map}
         resizeMode="cover"
