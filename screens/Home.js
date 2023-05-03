@@ -79,7 +79,7 @@ const RestaurantListItem = ({item, navigation}) => {
       onPress={() =>
         navigation.navigate('RestaurantScreen', {restaurant: item})
       }
-      style={styles}>
+      style={styles.resContainer}>
       <Image
         source={map}
         resizeMode="cover"
@@ -145,6 +145,13 @@ const styles = StyleSheet.create({
     width: 70,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  resContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderRadius: 10,
+    marginBottom: 10,
+    backgroundColor: '#FFFF',
   },
   title: {
     fontSize: 16,
