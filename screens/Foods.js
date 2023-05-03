@@ -19,7 +19,8 @@ const Foods = () => {
   const dispatch = useDispatch();
 
   return (
-    <View style={{flex: 1, backgroundColor: '#ebf0f2'}}>
+    <SafeAreaView>
+    <View style={{ backgroundColor: '#ebf0f2'}}>
       
       <Text style={styles.header}>Categories</Text>
 
@@ -31,6 +32,7 @@ const Foods = () => {
       </TouchableOpacity>
       <Text> {data}</Text> */}
     </View>
+    </SafeAreaView>
   );
 };
 

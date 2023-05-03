@@ -10,11 +10,13 @@ import {
   View,
   FlatList,
   Dimensions,
+  SafeAreaView,
 } from 'react-native';
 import {COLORS} from '../constants/theme';
 
 const Settings = ({navigation}) => {
   return (
+    <SafeAreaView>
     <View style={styles.container}>
       
 
@@ -44,6 +46,7 @@ const Settings = ({navigation}) => {
         <MoreScreenBtn btnName={'Withdraw My Account'} />
       </View>
     </View>
+    </SafeAreaView>
   );
 };
 
@@ -93,7 +96,6 @@ const MoreScreenBtn = ({onPress, btnName}) => {
 const {height, width} = Dimensions.get('window');
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: '#ebf0f2',
   },
   item: {
