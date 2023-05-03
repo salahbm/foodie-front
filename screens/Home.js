@@ -10,6 +10,7 @@ import {
   Image,
   Dimensions,
   TouchableOpacity,
+  SafeAreaView,
 } from 'react-native';
 import Loading from '../components/Loading';
 import {map} from '../assests';
@@ -23,20 +24,11 @@ const Home = ({navigation}) => {
   const [selectedId, setSelectedId] = useState(null);
 
   return (
-    <View style={{flex: 1, backgroundColor: '#ebf0f2'}}>
-      <View
-        style={{
-          height: Platform.OS === 'ios' ? (height >= 800 ? 50 : 10) : 0,
-          backgroundColor: '#055DF8',
-        }}
-      />
-
+    <SafeAreaView style={{flex: 1, backgroundColor: '#ebf0f2'}}>
       <View
         style={{
           justifyContent: 'center',
-
-          flex: 0.4,
-          marginVertical: 20,
+          flex: 0.45,
         }}>
         <Text style={styles.header}> Welcome {'Username'} !</Text>
         <Image
@@ -51,7 +43,7 @@ const Home = ({navigation}) => {
       </View>
       <View
         style={{
-          flex: 0.6,
+          flex: 0.55,
           marginHorizontal: 20,
           marginTop: Platform.OS === 'android' ? (height >= 700 ? 20 : 0) : 0,
         }}>
@@ -77,7 +69,7 @@ const Home = ({navigation}) => {
           vertical={true}
         />
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 const RestaurantListItem = ({item, navigation}) => {

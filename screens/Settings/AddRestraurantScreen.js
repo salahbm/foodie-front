@@ -341,7 +341,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#ebf0f2',
     marginTop: Platform.OS === 'ios' ? (height >= 700 ? 45 : 10) : 0,
     paddingHorizontal: 20,
-    height: height,
+    flex: 1,
   },
   text: {
     textAlign: 'center',
