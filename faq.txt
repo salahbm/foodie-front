@@ -1,0 +1,33 @@
+FAQ
+Welcome to our food discovery app! We hope you find it useful in discovering delicious restaurants in the area.
+Below are some frequently asked questions about our app:
+
+Q: How do I search for restaurants near my school?
+A: You can search for restaurants in the app. It will automatically open some recommendations, and you can also browse by category.
+And it will show you different varieties of restaurants nearby Dankook.
+
+Q: Can restaurant owners apply for their restaurant?
+A: Yes, they could; simply click on the settings and click on "Add New Restaurant." Then you will be directed to the restaurant.
+Follow the application process on the application page.
+
+Q: Will this show restaurants outside Dankook?
+A: Note that our app is meant for Dankook University foods; therefore, for now, we don't support food outside the Dankook area (1-2km nearby).
+ 
+Q: How do I create an account?
+A: To create an account, simply click on the "Sign Up" button on the app's home screen and follow the prompts.
+
+Q: Is the restaurant owner limited to restaurant applications?
+A: No, restaurants have the right to change the information about their restaurants at any time, even deleting the input restaurant.
+
+Terms and Conditions:
+Please read these terms and conditions carefully before using our food discovery app. By using our app, you agree to these terms and conditions.
+
+-Intellectual Property:All content and intellectual property on our app, including logos, images, and text, are the property of Food Discovery App, LLC. They are protected by applicable copyright and trademark laws.
+
+-User Conduct:You agree to use our app for lawful purposes only. Users agree not to engage in any conduct that could damage our app, infringe on our intellectual property, or violate any laws or regulations.
+
+-Data Privacy:We respect your privacy and protect your personal information. Our main priority is also to help users discover foods without leaking user data to other malicious users.
+
+Limitation of liability:We are not liable for any damages or losses that result from your use of our app, including but not limited to direct, indirect, incidental, or consequential damages.
+
+-Governing Law:These terms and conditions are governed by South Korean laws. Any disputes arising from these terms and conditions will be resolved in South Korea's courts.
