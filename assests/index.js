@@ -1,2 +1,3 @@
 const map = require('../assests/map.png');
-export {map};
+const chinese = require('../assests/chinese.png');
+export {map, chinese};

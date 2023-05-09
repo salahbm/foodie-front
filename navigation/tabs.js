@@ -1,7 +1,7 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import HomeStack from '../screens/Home/HomeStack';
 import SettingsStack from '../screens/Settings/SettingsStack';
-import Foods from '../screens/Foods';
+import FoodsSubStack from '../screens/Foods/FoodSubStack';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -38,8 +38,8 @@ function Tabs() {
         }}
       />
       <Tab.Screen
-        name="Foods"
-        component={Foods}
+        name="FoodsSubStack"
+        component={FoodsSubStack}
         options={{
           tabBarIcon: ({focused}) => (
             <View style={styles.container}>
