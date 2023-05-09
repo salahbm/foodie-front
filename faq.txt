@@ -1,4 +1,4 @@
-FAQ
+//FAQ
 Welcome to our food discovery app! We hope you find it useful in discovering delicious restaurants in the area.
 Below are some frequently asked questions about our app:
 
@@ -19,7 +19,12 @@ A: To create an account, simply click on the "Sign Up" button on the app's home 
 Q: Is the restaurant owner limited to restaurant applications?
 A: No, restaurants have the right to change the information about their restaurants at any time, even deleting the input restaurant.
 
-Terms and Conditions:
+//Help Center
+Our Help Center is here to help you with any questions or issues with our food discovery app
+Contact Us:
+For general inquiries or support, please email us at salahbm.001@gmail.com
+
+//Terms and Conditions:
 Please read these terms and conditions carefully before using our food discovery app. By using our app, you agree to these terms and conditions.
 
 -Intellectual Property:All content and intellectual property on our app, including logos, images, and text, are the property of Food Discovery App, LLC. They are protected by applicable copyright and trademark laws.
@@ -28,6 +33,6 @@ Please read these terms and conditions carefully before using our food discovery
 
 -Data Privacy:We respect your privacy and protect your personal information. Our main priority is also to help users discover foods without leaking user data to other malicious users.
 
-Limitation of liability:We are not liable for any damages or losses that result from your use of our app, including but not limited to direct, indirect, incidental, or consequential damages.
+-Limitation of liability:We are not liable for any damages or losses that result from your use of our app, including but not limited to direct, indirect, incidental, or consequential damages.
 
 -Governing Law:These terms and conditions are governed by South Korean laws. Any disputes arising from these terms and conditions will be resolved in South Korea's courts.
