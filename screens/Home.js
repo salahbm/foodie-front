@@ -48,7 +48,7 @@ const Home = ({navigation}) => {
           marginTop: Platform.OS === 'android' ? (height >= 700 ? 20 : 0) : 0,
         }}>
         <Text style={styles.header2}>Top Restaurants In This Area</Text>
-        <FlatList
+        {/* <FlatList
           horizontal
           showsHorizontalScrollIndicator={false}
           data={data}
@@ -56,10 +56,10 @@ const Home = ({navigation}) => {
           keyExtractor={item => item.id}
           extraData={selectedId}
           style={{width: '100%', marginBottom: 10, marginTop: 5}}
-        />
+        /> */}
         {loading && <Loading />}
         <FlatList
-          style={{width: '100%', paddingTop: 5}}
+          style={{width: '100%', paddingTop: 10}}
           data={data}
           renderItem={({item}) => (
             <RestaurantListItem navigation={navigation} item={item} />
