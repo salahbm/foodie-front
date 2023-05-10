@@ -15,7 +15,7 @@ import {addition, subtraction} from '../store/action';
 const {width, height} = Dimensions.get('window');
 import {ContexData} from '../constants/useContext';
 import {chinese} from '../assests';
-const Foods = ({nativgation}) => {
+const Foods = ({navigation}) => {
   const {data} = useContext(ContexData);
   useEffect(() => {
     // Fetch the data from your database
@@ -32,26 +32,30 @@ const Foods = ({nativgation}) => {
   return (
     <SafeAreaView>
       <Text style={styles.header}>Categories</Text>
-      <Text style={styles.header}>Categories</Text>
-      <Text style={styles.header}>Categories</Text>
-      <Text style={styles.header}>Categories</Text>
-      <Text style={styles.header}>Categories</Text>
-      <TypeGrid groupedRestaurants={groupedRestaurants} />
+
+      <TypeGrid
+        groupedRestaurants={groupedRestaurants}
+        navigation={navigation}
+      />
     </SafeAreaView>
   );
 };
-const TypeGrid = ({groupedRestaurants}) => {
+const TypeGrid = ({groupedRestaurants, navigation}) => {
   return (
     <>
       {Object.keys(groupedRestaurants).map(type1 => (
         <View key={type1}>
-          <TouchableOpacity>
+          <TouchableOpacity
+            key={type1}
+            onPress={() =>
+              navigation.navigate('FoodTypeScreen', {
+                group: groupedRestaurants,
+                type1: type1,
+              })
+            }>
             <Image source={chinese} style={styles.img} />
             <Text>{type1}</Text>
           </TouchableOpacity>
-          {groupedRestaurants[type1].map(restaurant => (
-            <Text key={restaurant.id}>{restaurant.name}</Text>
-          ))}
         </View>
       ))}
     </>
@@ -67,7 +71,8 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   img: {
-    width: 50,
-    height: 50,
+    width: 120,
+    height: 120,
+    borderRadius: 20,
   },
 });

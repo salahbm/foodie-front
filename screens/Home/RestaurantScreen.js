@@ -16,7 +16,7 @@ import {map} from '../../assests';
 import {Provider, Modal, Portal, Button} from 'react-native-paper';
 const RestaurantScreen = ({navigation}) => {
   const route = useRoute();
-  const restaurant = route.params.restaurant;
+  const restaurant = route.params?.restaurant;
   const [visible, setVisible] = useState(false);
 
   const showModal = () => setVisible(true);
@@ -30,7 +30,7 @@ const RestaurantScreen = ({navigation}) => {
             style={{flex: 0.5}}>
             <Entypo name="chevron-left" size={30} color="#333" />
           </TouchableOpacity>
-          <Text style={styles.textHeader}>{restaurant.name}</Text>
+          <Text style={styles.textHeader}>{restaurant?.name}</Text>
         </View>
         <ScrollView showsVerticalScrollIndicator={false}>
           <Image source={map} style={styles.courusel} resizeMode="cover" />
@@ -71,16 +71,16 @@ const RestaurantInfo = ({restaurant}) => {
           style={[styles.text1, {width: 300}]}
           ellipsizeMode="tail"
           numberOfLines={1}>
-          {restaurant.address}
+          {restaurant?.address}
         </Text>
       </View>
       <View style={styles.row}>
         <Text style={styles.text}>Phone:</Text>
-        <Text style={styles.text1}>{restaurant.phone}</Text>
+        <Text style={styles.text1}>{restaurant?.phone}</Text>
       </View>
       <View style={styles.row}>
         <Text style={styles.text}>Business Number:</Text>
-        <Text style={styles.text1}>{restaurant.businessNum}</Text>
+        <Text style={styles.text1}>{restaurant?.businessNum}</Text>
       </View>
       <View
         style={{
@@ -90,7 +90,7 @@ const RestaurantInfo = ({restaurant}) => {
         }}
       />
       <Text style={styles.ownerNote}>
-        {restaurant.note ? restaurant.note : 'No Notes Yet'}
+        {restaurant?.note ? restaurant?.note : 'No Notes Yet'}
       </Text>
       <View
         style={{
