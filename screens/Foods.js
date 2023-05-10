@@ -15,11 +15,11 @@ import {
 
 const {width, height} = Dimensions.get('window');
 import {ContexData} from '../constants/useContext';
-import {chinese} from '../assests';
+import {chinese, asian, western, korean} from '../assests';
 import {COLORS} from '../constants/theme';
 const Foods = ({navigation}) => {
   const {data} = useContext(ContexData);
-
+  const foodPhotos = {chinese, asian, western, korean};
   const groupedRestaurants = data.reduce((acc, restaurant) => {
     if (!acc[restaurant.type1]) {
       acc[restaurant.type1] = [];
@@ -33,17 +33,17 @@ const Foods = ({navigation}) => {
       <TypeGrid
         groupedRestaurants={groupedRestaurants}
         navigation={navigation}
+        foodPhotos={foodPhotos}
       />
     </SafeAreaView>
   );
 };
-const TypeGrid = ({groupedRestaurants, navigation}) => {
+const TypeGrid = ({groupedRestaurants, navigation, foodPhotos}) => {
   return (
     <>
       <FlatList
         data={Object.keys(groupedRestaurants)}
         numColumns={2}
-        contentContainerStyle={styles.list}
         renderItem={({item}) => (
           <View key={item} style={styles.typeContainer}>
             <TouchableOpacity
@@ -55,7 +55,12 @@ const TypeGrid = ({groupedRestaurants, navigation}) => {
                   type1: item,
                 })
               }>
-              <Image source={chinese} style={styles.img} />
+              <Image
+                resizeMode="cover"
+                source={foodPhotos[item.toLowerCase()]}
+                style={styles.img}
+              />
+
               <Text style={styles.text}>{item}</Text>
             </TouchableOpacity>
           </View>
@@ -78,7 +83,7 @@ const styles = StyleSheet.create({
     height: 140,
     borderRadius: 20,
   },
-  list: {},
+
   typeContainer: {
     margin: 10,
     paddingHorizontal: 10,

@@ -21,13 +21,13 @@ const FoodTypeScreen = ({navigation}) => {
   const type1 = route.params?.type1;
   return (
     <SafeAreaView>
-      <Text style={styles.header}>{type1}</Text>
       <View style={{alignItems: 'center', flexDirection: 'row'}}>
         <TouchableOpacity
           onPress={() => navigation.goBack()}
           style={{flex: 0.5}}>
           <Entypo name="chevron-left" size={30} color="#333" />
         </TouchableOpacity>
+        <Text style={styles.header}>{type1}</Text>
       </View>
       {group[type1].map(restaurant => (
         <TouchableOpacity
@@ -40,6 +40,7 @@ const FoodTypeScreen = ({navigation}) => {
               },
             })
           }>
+          <Image source={restaurant.image} style={styles.img} />
           <Text key={restaurant.id}>{restaurant.name}</Text>
         </TouchableOpacity>
       ))}
