@@ -11,7 +11,7 @@ const dessert = require('../assests/dessert.jpeg');
 const grilled = require('../assests/grilled.png');
 const jokbal = require('../assests/jokbal.jpg');
 const mexican = require('../assests/mexican.jpg');
-const lunchboc = require('../assests/lunchboc.jpg');
+const lunchbox = require('../assests/lunchbox.jpg');
 const pizza = require('../assests/pizza.jpg');
 const porridge = require('../assests/porridge.jpg');
 const salad = require('../assests/salad.jpg');
@@ -21,5 +21,29 @@ const snack = require('../assests/snack.jpg');
 const stew = require('../assests/stew.jpg');
 const sushi = require('../assests/sushi.jpg');
 const tonkatsu = require('../assests/tonkatsu.jpg');
-const western = require('../assests/western.jpg');
-export {map, chinese, asian, western, korean, bunsik, burger, chicken, cofee,dessert,grilled,jokbal,mexican,lunchboc,pizza,porridge,salad,sandwich,seafood,snack,stew,sushi,tonkatsu,western};
+
+export {
+  map,
+  chinese,
+  asian,
+  western,
+  korean,
+  bunsik,
+  burger,
+  chicken,
+  cofee,
+  dessert,
+  grilled,
+  jokbal,
+  mexican,
+  lunchbox,
+  pizza,
+  porridge,
+  salad,
+  sandwich,
+  seafood,
+  snack,
+  stew,
+  sushi,
+  tonkatsu,
+};
