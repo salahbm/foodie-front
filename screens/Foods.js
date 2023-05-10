@@ -10,17 +10,15 @@ import {
   TouchableOpacity,
   Dimensions,
   Image,
+  FlatList,
 } from 'react-native';
-import {addition, subtraction} from '../store/action';
+
 const {width, height} = Dimensions.get('window');
 import {ContexData} from '../constants/useContext';
 import {chinese} from '../assests';
+import {COLORS} from '../constants/theme';
 const Foods = ({navigation}) => {
   const {data} = useContext(ContexData);
-  useEffect(() => {
-    // Fetch the data from your database
-    // Set the data state variable using setRestaurants
-  }, []);
 
   const groupedRestaurants = data.reduce((acc, restaurant) => {
     if (!acc[restaurant.type1]) {
@@ -30,9 +28,8 @@ const Foods = ({navigation}) => {
     return acc;
   }, {});
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{flex: 1, alignItems: 'center'}}>
       <Text style={styles.header}>Categories</Text>
-
       <TypeGrid
         groupedRestaurants={groupedRestaurants}
         navigation={navigation}
@@ -43,21 +40,27 @@ const Foods = ({navigation}) => {
 const TypeGrid = ({groupedRestaurants, navigation}) => {
   return (
     <>
-      {Object.keys(groupedRestaurants).map(type1 => (
-        <View key={type1}>
-          <TouchableOpacity
-            key={type1}
-            onPress={() =>
-              navigation.navigate('FoodTypeScreen', {
-                group: groupedRestaurants,
-                type1: type1,
-              })
-            }>
-            <Image source={chinese} style={styles.img} />
-            <Text>{type1}</Text>
-          </TouchableOpacity>
-        </View>
-      ))}
+      <FlatList
+        data={Object.keys(groupedRestaurants)}
+        numColumns={2}
+        contentContainerStyle={styles.list}
+        renderItem={({item}) => (
+          <View key={item} style={styles.typeContainer}>
+            <TouchableOpacity
+              key={item}
+              style={{alignItems: 'center'}}
+              onPress={() =>
+                navigation.navigate('FoodTypeScreen', {
+                  group: groupedRestaurants,
+                  type1: item,
+                })
+              }>
+              <Image source={chinese} style={styles.img} />
+              <Text style={styles.text}>{item}</Text>
+            </TouchableOpacity>
+          </View>
+        )}
+      />
     </>
   );
 };
@@ -71,8 +74,21 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   img: {
-    width: 120,
-    height: 120,
+    width: 140,
+    height: 140,
     borderRadius: 20,
+  },
+  list: {},
+  typeContainer: {
+    margin: 10,
+    paddingHorizontal: 10,
+  },
+  text: {
+    color: COLORS.primary,
+    fontWeight: '700',
+    fontSize: 16,
+    lineHeight: 18,
+    paddingVertical: 4,
+    letterSpacing: 0.5,
   },
 });
