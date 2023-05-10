@@ -15,11 +15,57 @@ import {
 
 const {width, height} = Dimensions.get('window');
 import {ContexData} from '../constants/useContext';
-import {chinese, asian, western, korean} from '../assests';
+import {
+  chinese,
+  asian,
+  western,
+  korean,
+  bunsik,
+  burger,
+  chicken,
+  cofee,
+  dessert,
+  grilled,
+  jokbal,
+  mexican,
+  lunchbox,
+  pizza,
+  porridge,
+  salad,
+  sandwich,
+  seafood,
+  snack,
+  stew,
+  sushi,
+  tonkatsu,
+} from '../assests';
 import {COLORS} from '../constants/theme';
 const Foods = ({navigation}) => {
   const {data} = useContext(ContexData);
-  const foodPhotos = {chinese, asian, western, korean};
+  const foodPhotos = {
+    chinese,
+    asian,
+    western,
+    korean,
+    bunsik,
+    burger,
+    chicken,
+    cofee,
+    dessert,
+    grilled,
+    jokbal,
+    mexican,
+    lunchbox,
+    pizza,
+    porridge,
+    salad,
+    sandwich,
+    seafood,
+    snack,
+    stew,
+    sushi,
+    tonkatsu,
+  };
   const groupedRestaurants = data.reduce((acc, restaurant) => {
     if (!acc[restaurant.type1]) {
       acc[restaurant.type1] = [];

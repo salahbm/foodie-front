@@ -10,6 +10,7 @@ import {
   Platform,
   TextInput,
   TouchableOpacity,
+  SafeAreaView,
 } from 'react-native';
 import {Picker} from '@react-native-picker/picker';
 
@@ -75,91 +76,97 @@ const AddRestaurantScreen = ({navigation}) => {
 
   return (
     <Provider>
-      <View style={styles.container}>
-        <View style={{alignItems: 'center', flexDirection: 'row'}}>
-          <TouchableOpacity
-            onPress={() => navigation.navigate('Settings')}
-            style={{flex: 0.5}}>
-            <Entypo name="chevron-left" size={30} color="#333" />
-          </TouchableOpacity>
+      <SafeAreaView style={styles.container}>
+        <View style={{paddingHorizontal: 20}}>
+          <View style={{alignItems: 'center', flexDirection: 'row'}}>
+            <TouchableOpacity
+              onPress={() => navigation.navigate('Settings')}
+              style={{flex: 0.5}}>
+              <Entypo name="chevron-left" size={30} color="#333" />
+            </TouchableOpacity>
 
-          <Text style={styles.textHeader}>Add Restaurant:</Text>
-        </View>
-        <ScrollView style={{}} showsVerticalScrollIndicator={false}>
-          <Text style={styles.text}>Restaurant Name:</Text>
-          <TextInput
-            placeholder={'Enter Restaurant Name'}
-            style={styles.input}
-            placeholderTextColor={'#4545'}
-            value={restaurants.name}
-            onChangeText={value => handleChange('name', value)}
-          />
-          <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-            <View>
-              <Text style={styles.text}>Food Type 1: </Text>
-              <TextInput
-                placeholder="Enter Restaurant Type"
-                placeholderTextColor={'#4545'}
-                style={styles.inputtype}
-                value={restaurants.type1}
-                onChangeText={value => handleChange('type1', value)}
-              />
-            </View>
-            <View>
-              <Text style={styles.text}>Food Type 2:</Text>
-              <TextInput
-                placeholder="Enter Restaurant Type"
-                placeholderTextColor={'#4545'}
-                style={styles.inputtype}
-                value={restaurants.type2}
-                onChangeText={value => handleChange('type2', value)}
-              />
-            </View>
+            <Text style={styles.textHeader}>Add Restaurant:</Text>
+          </View>
+          <View style={styles.row1}>
+            <Text style={styles.text}>Restaurant Name:</Text>
+            <TextInput
+              placeholder={'Enter Restaurant Name'}
+              style={styles.input}
+              placeholderTextColor={'#4545'}
+              value={restaurants.name}
+              onChangeText={value => handleChange('name', value)}
+            />
           </View>
 
-          <Text style={styles.text}>Business Number:</Text>
+          <View style={styles.row1}>
+            <Text style={styles.text}>Food Type 1: </Text>
+            <TextInput
+              placeholder="Enter Restaurant Type"
+              placeholderTextColor={'#4545'}
+              style={styles.input}
+              value={restaurants.type1}
+              onChangeText={value => handleChange('type1', value)}
+            />
+          </View>
+          <View style={styles.row1}>
+            <Text style={styles.text}>Food Type 2:</Text>
+            <TextInput
+              placeholder="Enter Restaurant Type"
+              placeholderTextColor={'#4545'}
+              style={styles.input}
+              value={restaurants.type2}
+              onChangeText={value => handleChange('type2', value)}
+            />
+          </View>
 
-          <TextInput
-            placeholder="Enter Restaurant Business Number"
-            placeholderTextColor={'#4545'}
-            value={restaurants.businessNum}
-            onChangeText={value => handleChange('businessNum', value)}
-            style={styles.input}
-          />
-          <Text style={styles.text}>Phone Number:</Text>
+          <View style={styles.row1}>
+            <Text style={styles.text}>Business Number:</Text>
 
-          <TextInput
-            placeholder="Enter Phone Number"
-            placeholderTextColor={'#4545'}
-            value={restaurants.phone}
-            onChangeText={value => handleChange('phone', value)}
-            style={styles.input}
-          />
-          <Text style={styles.text}>Address :</Text>
+            <TextInput
+              placeholder="Enter Restaurant Business Number"
+              placeholderTextColor={'#4545'}
+              value={restaurants.businessNum}
+              onChangeText={value => handleChange('businessNum', value)}
+              style={styles.input}
+            />
+          </View>
+          <View style={styles.row1}>
+            <Text style={styles.text}>Phone Number:</Text>
+            <TextInput
+              placeholder="Enter Phone Number"
+              placeholderTextColor={'#4545'}
+              value={restaurants.phone}
+              onChangeText={value => handleChange('phone', value)}
+              style={styles.input}
+            />
+          </View>
+          <View style={styles.row1}>
+            <Text style={styles.text}>Address :</Text>
 
-          <TextInput
-            placeholder="Address"
-            placeholderTextColor={'#4545'}
-            value={restaurants.address}
-            onChangeText={value => handleChange('address', value)}
-            style={styles.input}
-          />
-          <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              paddingHorizontal: 20,
-              backgroundColor: '#a9ebba',
-              borderRadius: 10,
-              marginTop: 20,
-            }}>
+            <TextInput
+              placeholder="Address"
+              placeholderTextColor={'#4545'}
+              value={restaurants.address}
+              onChangeText={value => handleChange('address', value)}
+              style={styles.input}
+            />
+          </View>
+
+          <View style={styles.row1}>
             <Text style={styles.text}>Business Hours :</Text>
 
-            <Button icon={'clock'} onPress={showModal}>
+            <Button
+              icon={'clock'}
+              onPress={showModal}
+              style={{
+                width: width * 0.5,
+                backgroundColor: '#a9ebba',
+                borderRadius: 10,
+              }}>
               Select
             </Button>
           </View>
+
           <BusinessHoursModal
             hideModal={hideModal}
             showModal={showModal}
@@ -167,19 +174,20 @@ const AddRestaurantScreen = ({navigation}) => {
             restaurants={restaurants}
             setRestaurants={setRestaurants}
           />
-          <Text style={styles.text}>Note :</Text>
+          <View style={styles.row1}>
+            <Text style={styles.text}>Note :</Text>
 
-          <TextInput
-            placeholder="You can enter note for customers to see what is new in the restaurant(it can be updated anytime"
-            placeholderTextColor={'#4545'}
-            value={restaurants.note}
-            multiline={true}
-            onChangeText={value => handleChange('note', value)}
-            style={[styles.input, {height: 150}]}
-          />
-
+            <TextInput
+              placeholder="You can enter note for customers to see what is new in the restaurant(it can be updated anytime"
+              placeholderTextColor={'#4545'}
+              value={restaurants.note}
+              multiline={true}
+              onChangeText={value => handleChange('note', value)}
+              style={[styles.input, {height: 100, width: width * 0.7}]}
+            />
+          </View>
           <ScrollView
-            style={{marginTop: 20}}
+            style={{marginTop: 20, width: 350}}
             horizontal
             showsHorizontalScrollIndicator={false}>
             <View>
@@ -191,7 +199,7 @@ const AddRestaurantScreen = ({navigation}) => {
                 />
               )}
               <Button
-                style={{margin: 15}}
+                style={{margin: 5}}
                 icon="camera"
                 mode="contained"
                 onPress={() => handleChoosePic(1)}>
@@ -207,7 +215,7 @@ const AddRestaurantScreen = ({navigation}) => {
                 />
               )}
               <Button
-                style={{margin: 15}}
+                style={{margin: 5}}
                 icon="camera"
                 mode="contained"
                 onPress={() => handleChoosePic(2)}>
@@ -223,7 +231,7 @@ const AddRestaurantScreen = ({navigation}) => {
                 />
               )}
               <Button
-                style={{margin: 15}}
+                style={{margin: 5}}
                 icon="camera"
                 mode="contained"
                 onPress={() => handleChoosePic(3)}>
@@ -245,8 +253,8 @@ const AddRestaurantScreen = ({navigation}) => {
             onPress={saveRestaurant}>
             Save Restaurant
           </Button>
-        </ScrollView>
-      </View>
+        </View>
+      </SafeAreaView>
     </Provider>
   );
 };
@@ -262,7 +270,7 @@ const BusinessHoursModal = ({
     marginHorizontal: 20,
     padding: 20,
     backgroundColor: '#FFFF',
-    height: height / 2,
+    height: height / 1.8,
     borderRadius: 10,
   };
   const DAYS_OF_WEEK = [
@@ -314,7 +322,7 @@ const BusinessHoursModal = ({
             <Text style={styles.label}>{day}</Text>
             <View style={styles.pickerContainer}>
               <Picker
-                itemStyle={{color: 'green', height: 50}}
+                itemStyle={{color: 'green', height: 50, width: 120}}
                 style={styles.picker}
                 selectedValue={restaurants[day].start}
                 onValueChange={value => handleHoursChange(day, 'start', value)}>
@@ -322,7 +330,7 @@ const BusinessHoursModal = ({
               </Picker>
               <Text style={styles.separator}>-</Text>
               <Picker
-                itemStyle={{color: 'red', height: 50}}
+                itemStyle={{color: 'red', height: 50, width: 110}}
                 style={styles.picker}
                 selectedValue={restaurants[day].end}
                 onValueChange={value => handleHoursChange(day, 'end', value)}>
@@ -338,9 +346,6 @@ const BusinessHoursModal = ({
 const {height, width} = Dimensions.get('window');
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#ebf0f2',
-    marginTop: Platform.OS === 'ios' ? (height >= 700 ? 45 : 10) : 0,
-    paddingHorizontal: 20,
     flex: 1,
   },
   text: {
@@ -358,15 +363,15 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   input: {
-    width: width * 0.9,
+    width: width * 0.5,
+    backgroundColor: '#a9ebba',
     alignSelf: 'center',
     padding: 10,
     height: 40,
-    backgroundColor: '#a9ebba',
     borderRadius: 10,
   },
   inputtype: {
-    width: width * 0.4,
+    width: width * 0.3,
     padding: 10,
     height: 40,
     backgroundColor: '#a9ebba',
@@ -394,9 +399,15 @@ const styles = StyleSheet.create({
   },
   separator: {
     fontSize: 20,
-    marginHorizontal: 5,
+    marginHorizontal: 0,
   },
-  img: {width: 100, height: 100, margin: 15},
+  img: {width: 80, height: 80, margin: 10},
+  row1: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 10,
+  },
 });
 
 export default AddRestaurantScreen;
