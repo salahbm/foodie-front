@@ -28,7 +28,8 @@ const Foods = ({navigation}) => {
     return acc;
   }, {});
   return (
-    <SafeAreaView style={{flex: 1, alignItems: 'center'}}>
+    <SafeAreaView
+      style={{flex: 1, alignItems: 'center', backgroundColor: '#FFFF'}}>
       <Text style={styles.header}>Categories</Text>
       <TypeGrid
         groupedRestaurants={groupedRestaurants}

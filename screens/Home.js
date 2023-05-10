@@ -55,7 +55,7 @@ const Home = ({navigation}) => {
           renderItem={({item}) => <FlatCategories item={item} />}
           keyExtractor={item => item.id}
           extraData={selectedId}
-          style={{width: '100%', paddingVertical: 10}}
+          style={{width: '100%', marginBottom: 10, marginTop: 5}}
         />
         {loading && <Loading />}
         <FlatList
@@ -138,9 +138,10 @@ const styles = StyleSheet.create({
     color: '#333',
   },
   item: {
-    backgroundColor: COLORS.primary,
-    borderRadius: 10,
-    marginHorizontal: 5,
+    backgroundColor: 'rgba(255, 255, 255, 0.9)',
+
+    borderRadius: 5,
+    marginHorizontal: 6,
     height: 30,
     width: 70,
     justifyContent: 'center',
@@ -155,7 +156,9 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 16,
-    color: 'white',
+    color: COLORS.primary,
+    fontWeight: '700',
+    lineHeight: 18,
   },
   row: {
     alignItems: 'center',
